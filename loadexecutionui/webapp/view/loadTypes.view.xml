@@ -1,0 +1,35 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:tnt="sap.tnt" controllerName="com.sysco.wm.loadexecutionui.controller.loadTypes">
+    <Page title="{i18n>title}" showHeader="false">
+        <HBox width="100%" height="100%">
+            <VBox width="50%" alignItems="Center" alignContent="Center" justifyContent="Center">
+                <Button id="allLoads" class="loadVehicleFilters loadVehicleSelected sapUiSmallMarginBottom" text="{i18n>allLoadBtn}" press=".onAllLoads"/>
+                <Button id="shuttle" class="loadVehicleFilters loadVehicleSelected sapUiSmallMarginBottom" text="{i18n>shuttle}" press=".onShuttle"/>
+                <Button id="radial" class="loadVehicleFilters loadVehicleSelected sapUiSmallMarginBottom" text="{i18n>radial}" press=".onRadial"/>
+            </VBox>
+            <VBox width="50%" height="100%" alignContent="Center" class="responsiveBox" direction="Column" justifyContent="Center" fitContainer="true" renderType="Bare">
+                <ScrollContainer id="scRoutes" width="100%" vertical="true">
+                    <VBox width="100%" height="100%" alignContent="Center" alignItems="Center" fitContainer="true" justifyContent="Center">
+                        <List items="{path: '/value'}" id="allLoadLst" class="transparentList loadList sapUiSizeCompact" mode="SingleSelectMaster" itemPress="onListItemPress" growing="true" growingThreshold="5" backgroundDesign="Transparent">
+                            <CustomListItem id="clTemplate" type="Active">
+                                <VBox class="boxItem sapUiTinyMarginBottom" width="100%" alignContent="Center" alignItems="Center" fitContainer="true" justifyContent="Center">
+                                    <HBox justifyContent="Inherit" class="boxItem sapUiTinyMargin" width="100%" fitContainer="true" alignContent="Center" alignItems="Center" height="100%">
+                                        <Text text="{i18n>route} {Route}" class="sapUiTinyMarginBegin"/>
+                                        <ToolbarSpacer/>
+                                        <tnt:InfoLabel text="{newStatus}" colorScheme="9" class="sapUiTinyMargin sapUiSmallMarginEnd"/>
+                                    </HBox>
+                                </VBox>
+                            </CustomListItem>
+                        </List>
+                    </VBox>
+                </ScrollContainer>
+                <IllustratedMessage
+                    id="imNoData"
+                    title="{i18n>noDataText}"
+                    description="{i18n>noDataDesc}"
+                    illustrationSize="Medium"
+                    src="sap.m.IllustratedMessageType.NoData">
+                </IllustratedMessage>
+            </VBox>
+        </HBox>
+    </Page>
+</mvc:View>

@@ -1,0 +1,135 @@
+/* Enter your custom styles here */
+
+.borderLeft {
+    border-left: solid !important;
+}
+
+.borderRight {
+    border-right: solid !important;
+}
+
+.borderTop {
+    border-top: solid !important;
+}
+
+.loadVehicleFilters.sapMBtn {
+    min-width: 12rem;
+}
+
+.loadVehicleFilters .sapMBtnInner {
+    border: none;
+    border-radius: 2rem;
+    align-items: center;
+    height: 2.5rem;
+}
+
+.loadVehicleSelected .sapMBtnInner {
+    background-color: black;
+}
+
+.loadVehicleFilters .sapMBtnText {
+    font-size: .9rem;
+    color: #1b1b1e;
+}
+
+.loadVehicleSelected .sapMBtnText {
+    color: #ffffff !important;
+}
+
+.loadVehicleFilters .sapMBtnText:hover {
+    font-size: .9rem;
+    color: #1b1b1e;
+}
+
+.loadVehicleSelected .sapMBtnInner:hover {
+    background-color: black;
+}
+
+.boxItem {
+    background-color: black;
+    border: none;
+    border-radius: 2rem;
+    align-items: center;
+    height: 2.5rem;
+    min-width: 12rem;
+}
+
+.roundBoxBlue {
+    background-color: #03a5fc;
+    border: none;
+    border-radius: 2rem;
+    align-items: center;
+    height: 2.5rem;
+    min-width: 12rem;
+}
+
+.roundBoxGreen {
+    background-color: #02db4b;
+    border: none;
+    border-radius: 2rem;
+    align-items: center;
+    height: 2.5rem;
+    min-width: 12rem;
+}
+
+.boxItem .sapMText {
+    color: white;
+    padding: 0.7rem;
+}
+
+.responsiveBox {
+    width: 50%;
+    padding: 0 1rem;
+    box-sizing: border-box;
+}
+
+@media screen and (max-width: 768px) {
+    .responsiveBox {
+        width: 100%;
+        padding: 8px;
+    }
+}
+
+.otb1 {
+    border-bottom: none !important;
+    box-shadow: none !important;
+}
+
+.css1 {
+    padding-top: 0.9rem;
+    padding-left: 0.5rem;
+}
+
+.transparentList .sapMLIB {
+    background: transparent !important;
+    border-bottom: 1px transparent !important;
+}
+
+.sapMLIB {
+    background: transparent !important;
+    border-bottom: transparent !important;
+}
+
+.whiteIcon .sapMObjStatusIcon>.sapUiIcon {
+    color: white !important;
+}
+
+.whiteText {
+    color: white !important;
+}
+
+.customMarginPalletList {
+    margin: .2rem !important;
+}
+
+.loadList .sapMLIB {
+    background-color: whitesmoke !important;
+}
+
+.largeIcon .sapMObjStatusIcon>.sapUiIcon {
+    font-size: 1.2rem;
+}
+
+.topPadding {
+    padding-top: 88px !important;
+}

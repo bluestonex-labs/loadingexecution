@@ -1,0 +1,11 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core">
+	<Dialog id="mainDialog" title="{i18n>remPallet}">
+		<content>
+			<VBox class="sapUiSmallMargin" alignItems="Center" alignContent="Center" fitContainer="true" justifyContent="Center">
+                <Button id="btnClose" class="loadVehicleFilters loadVehicleSelected" text="{i18n>closeVehicle}" press="onClose"/>
+				<Button id="btnExit" class="loadVehicleFilters loadVehicleSelected" text="{i18n>exitRoute}" press="onRouteExit"/>
+                <Button id="btnReturn" class="loadVehicleFilters loadVehicleSelected" text="{i18n>return}" press="onReturn"/>
+			</VBox>
+		</content>
+	</Dialog>
+</core:FragmentDefinition>

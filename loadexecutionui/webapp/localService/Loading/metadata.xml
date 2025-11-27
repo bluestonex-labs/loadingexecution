@@ -1,0 +1,2185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+        <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="LoadingService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotation Term="Core.Links">
+                <Collection>
+                    <Record>
+                        <PropertyValue Property="rel" String="author"/>
+                        <PropertyValue Property="href" String="https://cap.cloud.sap"/>
+                    </Record>
+                </Collection>
+            </Annotation>
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="Materials" EntityType="LoadingService.Materials">
+                    <NavigationPropertyBinding Path="BaseUnitOfMeasure" Target="Units"/>
+                    <NavigationPropertyBinding Path="OrderUnit" Target="Units"/>
+                    <NavigationPropertyBinding Path="WeightUnit" Target="Units"/>
+                    <NavigationPropertyBinding Path="VolumeUnit" Target="Units"/>
+                    <NavigationPropertyBinding Path="UnitOfDimension" Target="Units"/>
+                    <NavigationPropertyBinding Path="UnitOfWeight" Target="Units"/>
+                    <NavigationPropertyBinding Path="VolumeUnit2" Target="Units"/>
+                    <NavigationPropertyBinding Path="ContentUnit" Target="Units"/>
+                    <NavigationPropertyBinding Path="UnitOfMeasurement" Target="Units"/>
+                    <NavigationPropertyBinding Path="QuarantineTimeUnit" Target="Units"/>
+                    <NavigationPropertyBinding Path="LogisticsUnitOfMeasure" Target="Units"/>
+                    <NavigationPropertyBinding Path="UomSupportWeight" Target="Units"/>
+                    <NavigationPropertyBinding Path="texts" Target="Materials_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="Materials_texts"/>
+                </EntitySet>
+                <EntitySet Name="Units" EntityType="LoadingService.Units">
+                    <NavigationPropertyBinding Path="texts" Target="Units_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="Units_texts"/>
+                </EntitySet>
+                <EntitySet Name="MaterialStorageTypes" EntityType="LoadingService.MaterialStorageTypes">
+                    <NavigationPropertyBinding Path="Material" Target="Materials"/>
+                    <NavigationPropertyBinding Path="WarehouseNumber" Target="Warehouses"/>
+                </EntitySet>
+                <EntitySet Name="MaterialWarehouses" EntityType="LoadingService.MaterialWarehouses">
+                    <NavigationPropertyBinding Path="Material" Target="Materials"/>
+                    <NavigationPropertyBinding Path="WarehouseNumber" Target="Warehouses"/>
+                    <NavigationPropertyBinding Path="UnitOfMeasure" Target="Units"/>
+                    <NavigationPropertyBinding Path="WmUnit" Target="Units"/>
+                    <NavigationPropertyBinding Path="CapconsumptionUnit" Target="Units"/>
+                </EntitySet>
+                <EntitySet Name="MaterialUnits" EntityType="LoadingService.MaterialUnits">
+                    <NavigationPropertyBinding Path="Material" Target="Materials"/>
+                    <NavigationPropertyBinding Path="Alternativeunit" Target="Units"/>
+                    <NavigationPropertyBinding Path="Unit" Target="Units"/>
+                    <NavigationPropertyBinding Path="VolumeUnit" Target="Units"/>
+                    <NavigationPropertyBinding Path="WeightUnit" Target="Units"/>
+                    <NavigationPropertyBinding Path="LowerLevUnit" Target="Units"/>
+                    <NavigationPropertyBinding Path="UnitOfMeasmnt" Target="Units"/>
+                </EntitySet>
+                <EntitySet Name="Warehouses" EntityType="LoadingService.Warehouses">
+                    <NavigationPropertyBinding Path="texts" Target="Warehouses_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="Warehouses_texts"/>
+                </EntitySet>
+                <EntitySet Name="Quants" EntityType="LoadingService.Quants">
+                    <NavigationPropertyBinding Path="WarehouseNumber" Target="Warehouses"/>
+                    <NavigationPropertyBinding Path="Material" Target="Materials"/>
+                    <NavigationPropertyBinding Path="BaseUnitOfMeasure" Target="Units"/>
+                    <NavigationPropertyBinding Path="WeightUnit" Target="Units"/>
+                </EntitySet>
+                <EntitySet Name="StorageBins" EntityType="LoadingService.StorageBins">
+                    <NavigationPropertyBinding Path="WarehouseNumber" Target="Warehouses"/>
+                </EntitySet>
+                <EntitySet Name="StorageUnits" EntityType="LoadingService.StorageUnits">
+                    <NavigationPropertyBinding Path="WarehouseNumber" Target="Warehouses"/>
+                    <NavigationPropertyBinding Path="WeightUnit" Target="Units"/>
+                </EntitySet>
+                <EntitySet Name="SalesDocuments" EntityType="LoadingService.SalesDocuments">
+                    <NavigationPropertyBinding Path="WeightUnit" Target="Units"/>
+                    <NavigationPropertyBinding Path="WeightUnit2" Target="Units"/>
+                    <NavigationPropertyBinding Path="To_SalesDocumentItems" Target="SalesDocumentItems"/>
+                </EntitySet>
+                <EntitySet Name="SalesDocumentItems" EntityType="LoadingService.SalesDocumentItems">
+                    <NavigationPropertyBinding Path="SalesDocument" Target="SalesDocuments"/>
+                    <NavigationPropertyBinding Path="Material" Target="Materials"/>
+                    <NavigationPropertyBinding Path="TargetQuantityUom" Target="Units"/>
+                    <NavigationPropertyBinding Path="BaseUnitOfMeasure" Target="Units"/>
+                    <NavigationPropertyBinding Path="SalesUnit" Target="Units"/>
+                    <NavigationPropertyBinding Path="WeightUnit" Target="Units"/>
+                    <NavigationPropertyBinding Path="VolumeUnit" Target="Units"/>
+                    <NavigationPropertyBinding Path="UnitOfMeasure" Target="Units"/>
+                    <NavigationPropertyBinding Path="ProductGroupUnit" Target="Units"/>
+                    <NavigationPropertyBinding Path="BaseUnitOfMeasure2" Target="Units"/>
+                </EntitySet>
+                <EntitySet Name="Deliveries" EntityType="LoadingService.Deliveries">
+                    <NavigationPropertyBinding Path="Weightunit" Target="Units"/>
+                    <NavigationPropertyBinding Path="Volumeunit" Target="Units"/>
+                    <NavigationPropertyBinding Path="Warehousenumber" Target="Warehouses"/>
+                    <NavigationPropertyBinding Path="To_DeliveryItems" Target="DeliveryItems"/>
+                </EntitySet>
+                <EntitySet Name="DeliveryItems" EntityType="LoadingService.DeliveryItems">
+                    <NavigationPropertyBinding Path="Delivery" Target="Deliveries"/>
+                    <NavigationPropertyBinding Path="Material" Target="Materials"/>
+                    <NavigationPropertyBinding Path="BaseUnitOfMeasure" Target="Units"/>
+                    <NavigationPropertyBinding Path="SalesUnit" Target="Units"/>
+                    <NavigationPropertyBinding Path="WeightUnit" Target="Units"/>
+                    <NavigationPropertyBinding Path="VolumeUnit" Target="Units"/>
+                    <NavigationPropertyBinding Path="WarehouseNumber" Target="Warehouses"/>
+                    <NavigationPropertyBinding Path="SalesOrder" Target="SalesDocuments"/>
+                    <NavigationPropertyBinding Path="To_SalesDocumentItem" Target="SalesDocumentItems"/>
+                </EntitySet>
+                <EntitySet Name="MaterialStorageLocation" EntityType="LoadingService.MaterialStorageLocation">
+                    <NavigationPropertyBinding Path="Material" Target="Materials"/>
+                </EntitySet>
+                <EntitySet Name="ReplenTR" EntityType="LoadingService.ReplenTR">
+                    <NavigationPropertyBinding Path="Plant" Target="Plants"/>
+                    <NavigationPropertyBinding Path="WarehouseNumber" Target="Warehouses"/>
+                    <NavigationPropertyBinding Path="Material" Target="Materials"/>
+                </EntitySet>
+                <EntitySet Name="PickTaskStatuses" EntityType="LoadingService.PickTaskStatuses">
+                    <NavigationPropertyBinding Path="texts" Target="PickTaskStatuses_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="PickTaskStatuses_texts"/>
+                </EntitySet>
+                <EntitySet Name="PickTypes" EntityType="LoadingService.PickTypes">
+                    <NavigationPropertyBinding Path="texts" Target="PickTypes_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="PickTypes_texts"/>
+                </EntitySet>
+                <EntitySet Name="Media" EntityType="LoadingService.Media">
+                    <NavigationPropertyBinding Path="texts" Target="Media_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="Media_texts"/>
+                </EntitySet>
+                <EntitySet Name="MediaTypes" EntityType="LoadingService.MediaTypes">
+                    <NavigationPropertyBinding Path="Media" Target="Media"/>
+                </EntitySet>
+                <EntitySet Name="StorageLocationMerging" EntityType="LoadingService.StorageLocationMerging">
+                    <NavigationPropertyBinding Path="WarehouseNumber" Target="Warehouses"/>
+                </EntitySet>
+                <EntitySet Name="MHETypes" EntityType="LoadingService.MHETypes">
+                    <NavigationPropertyBinding Path="texts" Target="MHETypes_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="MHETypes_texts"/>
+                </EntitySet>
+                <EntitySet Name="MHEAssignments" EntityType="LoadingService.MHEAssignments">
+                    <NavigationPropertyBinding Path="MheType" Target="MHETypes"/>
+                </EntitySet>
+                <EntitySet Name="PickTaskHeaders" EntityType="LoadingService.PickTaskHeaders">
+                    <NavigationPropertyBinding Path="PickType" Target="PickTypes"/>
+                    <NavigationPropertyBinding Path="MediaType" Target="MediaTypes"/>
+                    <NavigationPropertyBinding Path="Media" Target="Media"/>
+                    <NavigationPropertyBinding Path="Plant" Target="Plants"/>
+                    <NavigationPropertyBinding Path="Status" Target="PickTaskStatuses"/>
+                    <NavigationPropertyBinding Path="MHEType" Target="MHEAssignments"/>
+                    <NavigationPropertyBinding Path="To_PickTaskItems" Target="PickTaskItems"/>
+                    <NavigationPropertyBinding Path="To_Marshalling" Target="Marshalling"/>
+                </EntitySet>
+                <EntitySet Name="PickTaskItems" EntityType="LoadingService.PickTaskItems">
+                    <NavigationPropertyBinding Path="Task" Target="PickTaskHeaders"/>
+                    <NavigationPropertyBinding Path="Material" Target="Materials"/>
+                    <NavigationPropertyBinding Path="Uom" Target="Units"/>
+                    <NavigationPropertyBinding Path="Status" Target="PickTaskStatuses"/>
+                    <NavigationPropertyBinding Path="OriginalPickTask" Target="PickTaskItems"/>
+                    <NavigationPropertyBinding Path="Warehouse" Target="Warehouses"/>
+                    <NavigationPropertyBinding Path="ShortReasonCode" Target="ShortReasonCodes"/>
+                    <NavigationPropertyBinding Path="To_PickTaskDeliveries" Target="PickTaskDeliveries"/>
+                    <NavigationPropertyBinding Path="To_Palletisations" Target="PalletisationItems"/>
+                </EntitySet>
+                <EntitySet Name="PickTaskDeliveries" EntityType="LoadingService.PickTaskDeliveries">
+                    <NavigationPropertyBinding Path="PickTask" Target="PickTaskItems"/>
+                    <NavigationPropertyBinding Path="DeliveryItems" Target="DeliveryItems"/>
+                    <NavigationPropertyBinding Path="To_PickTaskTONumbers" Target="PickTaskTONumbers"/>
+                </EntitySet>
+                <EntitySet Name="PlantRoutes" EntityType="LoadingService.PlantRoutes"/>
+                <EntitySet Name="MediaDeterminations" EntityType="LoadingService.MediaDeterminations">
+                    <NavigationPropertyBinding Path="PickType" Target="PickTypes"/>
+                    <NavigationPropertyBinding Path="OutputMediaType" Target="MediaTypes"/>
+                </EntitySet>
+                <EntitySet Name="RouteVehicleMappings" EntityType="LoadingService.RouteVehicleMappings"/>
+                <EntitySet Name="RemovalStrategyHeaders" EntityType="LoadingService.RemovalStrategyHeaders">
+                    <NavigationPropertyBinding Path="Warehouse" Target="Warehouses"/>
+                    <NavigationPropertyBinding Path="PickType" Target="PickTypes"/>
+                </EntitySet>
+                <EntitySet Name="RemovalStrategyItems" EntityType="LoadingService.RemovalStrategyItems">
+                    <NavigationPropertyBinding Path="Strategy" Target="RemovalStrategyHeaders"/>
+                </EntitySet>
+                <EntitySet Name="PickWalkSequence" EntityType="LoadingService.PickWalkSequence">
+                    <NavigationPropertyBinding Path="WarehouseNumber" Target="Warehouses"/>
+                </EntitySet>
+                <EntitySet Name="PackingBox" EntityType="LoadingService.PackingBox"/>
+                <EntitySet Name="ShortReasonCodes" EntityType="LoadingService.ShortReasonCodes">
+                    <NavigationPropertyBinding Path="texts" Target="ShortReasonCodes_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="ShortReasonCodes_texts"/>
+                </EntitySet>
+                <EntitySet Name="MarshallingBins" EntityType="LoadingService.MarshallingBins">
+                    <NavigationPropertyBinding Path="Area" Target="Areas"/>
+                    <NavigationPropertyBinding Path="Status" Target="MarshallingBinStatuses"/>
+                    <NavigationPropertyBinding Path="texts" Target="MarshallingBins_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="MarshallingBins_texts"/>
+                </EntitySet>
+                <EntitySet Name="MarshallingBinStatuses" EntityType="LoadingService.MarshallingBinStatuses">
+                    <NavigationPropertyBinding Path="texts" Target="MarshallingBinStatuses_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="MarshallingBinStatuses_texts"/>
+                </EntitySet>
+                <EntitySet Name="MarshallingRules" EntityType="LoadingService.MarshallingRules">
+                    <NavigationPropertyBinding Path="Media" Target="Media"/>
+                    <NavigationPropertyBinding Path="PickStatus" Target="PickTaskStatuses"/>
+                    <NavigationPropertyBinding Path="CurrentMarshallingAreaID" Target="Areas"/>
+                    <NavigationPropertyBinding Path="DestinationMarshallingAreaID" Target="Areas"/>
+                    <NavigationPropertyBinding Path="DestinationMarshallingBin" Target="MarshallingBins"/>
+                    <NavigationPropertyBinding Path="DestinationMarshallingStatus" Target="MarshallingStatuses"/>
+                </EntitySet>
+                <EntitySet Name="Marshalling" EntityType="LoadingService.Marshalling">
+                    <NavigationPropertyBinding Path="Task" Target="PickTaskHeaders"/>
+                    <NavigationPropertyBinding Path="Status" Target="MarshallingStatuses"/>
+                    <NavigationPropertyBinding Path="MarshallingBinID" Target="MarshallingBins"/>
+                    <NavigationPropertyBinding Path="SuggestedBinID" Target="MarshallingBins"/>
+                </EntitySet>
+                <EntitySet Name="MarshallingStatuses" EntityType="LoadingService.MarshallingStatuses">
+                    <NavigationPropertyBinding Path="texts" Target="MarshallingStatuses_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="MarshallingStatuses_texts"/>
+                </EntitySet>
+                <EntitySet Name="Areas" EntityType="LoadingService.Areas">
+                    <NavigationPropertyBinding Path="Group" Target="Groups"/>
+                    <NavigationPropertyBinding Path="To_MarshallingBins" Target="MarshallingBins"/>
+                    <NavigationPropertyBinding Path="texts" Target="Areas_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="Areas_texts"/>
+                </EntitySet>
+                <EntitySet Name="Groups" EntityType="LoadingService.Groups">
+                    <NavigationPropertyBinding Path="To_Areas" Target="Areas"/>
+                    <NavigationPropertyBinding Path="texts" Target="Groups_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="Groups_texts"/>
+                </EntitySet>
+                <EntitySet Name="Plants" EntityType="LoadingService.Plants">
+                    <NavigationPropertyBinding Path="texts" Target="Plants_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="Plants_texts"/>
+                </EntitySet>
+                <EntitySet Name="ReplenRuleHeader" EntityType="LoadingService.ReplenRuleHeader">
+                    <NavigationPropertyBinding Path="Warehouse" Target="Warehouses"/>
+                </EntitySet>
+                <EntitySet Name="PalletisationItems" EntityType="LoadingService.PalletisationItems">
+                    <NavigationPropertyBinding Path="Material" Target="Materials"/>
+                    <NavigationPropertyBinding Path="Uom" Target="Units"/>
+                    <NavigationPropertyBinding Path="Task" Target="PickTaskItems"/>
+                </EntitySet>
+                <EntitySet Name="PickTaskTONumbers" EntityType="LoadingService.PickTaskTONumbers">
+                    <NavigationPropertyBinding Path="PickTaskDelivery" Target="PickTaskDeliveries"/>
+                </EntitySet>
+                <EntitySet Name="Materials_texts" EntityType="LoadingService.Materials_texts"/>
+                <EntitySet Name="Units_texts" EntityType="LoadingService.Units_texts"/>
+                <EntitySet Name="Warehouses_texts" EntityType="LoadingService.Warehouses_texts"/>
+                <EntitySet Name="PickTaskStatuses_texts" EntityType="LoadingService.PickTaskStatuses_texts"/>
+                <EntitySet Name="PickTypes_texts" EntityType="LoadingService.PickTypes_texts"/>
+                <EntitySet Name="Media_texts" EntityType="LoadingService.Media_texts"/>
+                <EntitySet Name="MHETypes_texts" EntityType="LoadingService.MHETypes_texts"/>
+                <EntitySet Name="ShortReasonCodes_texts" EntityType="LoadingService.ShortReasonCodes_texts"/>
+                <EntitySet Name="MarshallingBins_texts" EntityType="LoadingService.MarshallingBins_texts">
+                    <NavigationPropertyBinding Path="Area" Target="Areas"/>
+                </EntitySet>
+                <EntitySet Name="MarshallingBinStatuses_texts" EntityType="LoadingService.MarshallingBinStatuses_texts"/>
+                <EntitySet Name="MarshallingStatuses_texts" EntityType="LoadingService.MarshallingStatuses_texts"/>
+                <EntitySet Name="Areas_texts" EntityType="LoadingService.Areas_texts">
+                    <NavigationPropertyBinding Path="Group" Target="Groups"/>
+                </EntitySet>
+                <EntitySet Name="Groups_texts" EntityType="LoadingService.Groups_texts"/>
+                <EntitySet Name="Plants_texts" EntityType="LoadingService.Plants_texts"/>
+                <FunctionImport Name="getConsolidatedRoutes" Function="LoadingService.getConsolidatedRoutes"/>
+                <FunctionImport Name="getPalletsOfRoute" Function="LoadingService.getPalletsOfRoute"/>
+                <ActionImport Name="confirmLoaded" Action="LoadingService.confirmLoaded"/>
+                <FunctionImport Name="getVehiclesForRoute" Function="LoadingService.getVehiclesForRoute"/>
+                <FunctionImport Name="getDashaboardListOfVechicle" Function="LoadingService.getDashaboardListOfVechicle"/>
+                <FunctionImport Name="getPalletsOfRouteVehicle" Function="LoadingService.getPalletsOfRouteVehicle"/>
+            </EntityContainer>
+            <EntityType Name="Materials">
+                <Key>
+                    <PropertyRef Name="Material"/>
+                </Key>
+                <Property Name="Material" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="CreatedOn" Type="Edm.Date"/>
+                <Property Name="CreatedBy" Type="Edm.String" MaxLength="12"/>
+                <Property Name="LastChange" Type="Edm.Date"/>
+                <Property Name="ChangedBy" Type="Edm.String" MaxLength="12"/>
+                <Property Name="MaterialType" Type="Edm.String" MaxLength="4"/>
+                <Property Name="MaterialGroup" Type="Edm.String" MaxLength="9"/>
+                <NavigationProperty Name="BaseUnitOfMeasure" Type="LoadingService.Units">
+                    <ReferentialConstraint Property="BaseUnitOfMeasure_UnitCode" ReferencedProperty="UnitCode"/>
+                </NavigationProperty>
+                <Property Name="BaseUnitOfMeasure_UnitCode" Type="Edm.String" MaxLength="3"/>
+                <NavigationProperty Name="OrderUnit" Type="LoadingService.Units">
+                    <ReferentialConstraint Property="OrderUnit_UnitCode" ReferencedProperty="UnitCode"/>
+                </NavigationProperty>
+                <Property Name="OrderUnit_UnitCode" Type="Edm.String" MaxLength="3"/>
+                <Property Name="Document" Type="Edm.String" MaxLength="22"/>
+                <Property Name="DocumentType" Type="Edm.String" MaxLength="3"/>
+                <Property Name="SizeDimensions" Type="Edm.String" MaxLength="32"/>
+                <Property Name="BasicMaterial" Type="Edm.String" MaxLength="48"/>
+                <Property Name="IndustryStdDesc" Type="Edm.String" MaxLength="18"/>
+                <Property Name="LabOffice" Type="Edm.String" MaxLength="3"/>
+                <Property Name="PurchasingValueKey" Type="Edm.String" MaxLength="4"/>
+                <Property Name="GrossWeight" Type="Edm.Decimal" Precision="13" Scale="3"/>
+                <Property Name="NetWeight" Type="Edm.Decimal" Precision="13" Scale="3"/>
+                <NavigationProperty Name="WeightUnit" Type="LoadingService.Units">
+                    <ReferentialConstraint Property="WeightUnit_UnitCode" ReferencedProperty="UnitCode"/>
+                </NavigationProperty>
+                <Property Name="WeightUnit_UnitCode" Type="Edm.String" MaxLength="3"/>
+                <Property Name="Volume" Type="Edm.Decimal" Precision="13" Scale="3"/>
+                <NavigationProperty Name="VolumeUnit" Type="LoadingService.Units">
+                    <ReferentialConstraint Property="VolumeUnit_UnitCode" ReferencedProperty="UnitCode"/>
+                </NavigationProperty>
+                <Property Name="VolumeUnit_UnitCode" Type="Edm.String" MaxLength="3"/>
+                <Property Name="ContainerReqmts" Type="Edm.String" MaxLength="2"/>
+                <Property Name="StorageConditions" Type="Edm.String" MaxLength="2"/>
+                <Property Name="TempConditions" Type="Edm.String" MaxLength="2"/>
+                <Property Name="LowLevelCode" Type="Edm.String" MaxLength="3"/>
+                <Property Name="TransportationGroup" Type="Edm.String" MaxLength="4"/>
+                <Property Name="HazMaterialNumber" Type="Edm.String" MaxLength="18"/>
+                <Property Name="Division" Type="Edm.String" MaxLength="2"/>
+                <Property Name="EanNumber" Type="Edm.String" MaxLength="13"/>
+                <Property Name="ProcurementRule" Type="Edm.String" MaxLength="1"/>
+                <Property Name="SourceOfSupply" Type="Edm.String" MaxLength="1"/>
+                <Property Name="EanUpc" Type="Edm.String" MaxLength="18"/>
+                <Property Name="EanCategory" Type="Edm.String" MaxLength="2"/>
+                <Property Name="Length" Type="Edm.Decimal" Precision="13" Scale="3"/>
+                <Property Name="Width" Type="Edm.Decimal" Precision="13" Scale="3"/>
+                <Property Name="Height" Type="Edm.Decimal" Precision="13" Scale="3"/>
+                <NavigationProperty Name="UnitOfDimension" Type="LoadingService.Units">
+                    <ReferentialConstraint Property="UnitOfDimension_UnitCode" ReferencedProperty="UnitCode"/>
+                </NavigationProperty>
+                <Property Name="UnitOfDimension_UnitCode" Type="Edm.String" MaxLength="3"/>
+                <Property Name="AllowedPkgWeight" Type="Edm.Decimal" Precision="13" Scale="3"/>
+                <NavigationProperty Name="UnitOfWeight" Type="LoadingService.Units">
+                    <ReferentialConstraint Property="UnitOfWeight_UnitCode" ReferencedProperty="UnitCode"/>
+                </NavigationProperty>
+                <Property Name="UnitOfWeight_UnitCode" Type="Edm.String" MaxLength="3"/>
+                <Property Name="AllowedPkgVolume" Type="Edm.Decimal" Precision="13" Scale="3"/>
+                <NavigationProperty Name="VolumeUnit2" Type="LoadingService.Units">
+                    <ReferentialConstraint Property="VolumeUnit2_UnitCode" ReferencedProperty="UnitCode"/>
+                </NavigationProperty>
+                <Property Name="VolumeUnit2_UnitCode" Type="Edm.String" MaxLength="3"/>
+                <Property Name="BatchManagement" Type="Edm.String" MaxLength="1"/>
+                <Property Name="PackagingMatType" Type="Edm.String" MaxLength="4"/>
+                <Property Name="MaximumLevel" Type="Edm.Decimal" Precision="3" Scale="3"/>
+                <Property Name="MatlGrpPackmatls" Type="Edm.String" MaxLength="4"/>
+                <Property Name="AuthorizationGroup" Type="Edm.String" MaxLength="4"/>
+                <Property Name="ValidFrom" Type="Edm.Date"/>
+                <Property Name="ValidTo" Type="Edm.Date"/>
+                <Property Name="XPlantMatlStatus" Type="Edm.String" MaxLength="2"/>
+                <Property Name="XDistrchainStatus" Type="Edm.String" MaxLength="2"/>
+                <Property Name="ValidFrom2" Type="Edm.Date"/>
+                <Property Name="MinRemShelfLife" Type="Edm.Decimal" Precision="4" Scale="0"/>
+                <Property Name="TotalShelfLife" Type="Edm.Decimal" Precision="4" Scale="0"/>
+                <Property Name="StoragePercentage" Type="Edm.Decimal" Precision="3" Scale="0"/>
+                <NavigationProperty Name="ContentUnit" Type="LoadingService.Units">
+                    <ReferentialConstraint Property="ContentUnit_UnitCode" ReferencedProperty="UnitCode"/>
+                </NavigationProperty>
+                <Property Name="ContentUnit_UnitCode" Type="Edm.String" MaxLength="3"/>
+                <Property Name="NetContents" Type="Edm.Decimal" Precision="13" Scale="3"/>
+                <Property Name="ComparisonPriceunit" Type="Edm.Decimal" Precision="5" Scale="0"/>
+                <Property Name="InBulkLiquid" Type="Edm.String" MaxLength="1"/>
+                <Property Name="Closed" Type="Edm.String" MaxLength="1"/>
+                <Property Name="PeriodIndForSled" Type="Edm.String" MaxLength="1"/>
+                <Property Name="RoundingRuleSled" Type="Edm.String" MaxLength="1"/>
+                <Property Name="ExpirationDate" Type="Edm.String" MaxLength="1"/>
+                <Property Name="StandardHuType" Type="Edm.String" MaxLength="4"/>
+                <Property Name="WhStorageCondition" Type="Edm.String" MaxLength="2"/>
+                <Property Name="WhMaterialGroup" Type="Edm.String" MaxLength="4"/>
+                <Property Name="HandlingUnitType" Type="Edm.String" MaxLength="4"/>
+                <Property Name="VarbTareWeight" Type="Edm.String" MaxLength="1"/>
+                <Property Name="MaximumCapacity" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <Property Name="OvercapacityToler" Type="Edm.Decimal" Precision="3" Scale="1"/>
+                <Property Name="MaxPackLength" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <Property Name="MaxPackWidth" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <Property Name="MaxPackHeight" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <NavigationProperty Name="UnitOfMeasurement" Type="LoadingService.Units">
+                    <ReferentialConstraint Property="UnitOfMeasurement_UnitCode" ReferencedProperty="UnitCode"/>
+                </NavigationProperty>
+                <Property Name="UnitOfMeasurement_UnitCode" Type="Edm.String" MaxLength="3"/>
+                <Property Name="CountryOfOrigin" Type="Edm.String" MaxLength="3"/>
+                <NavigationProperty Name="QuarantineTimeUnit" Type="LoadingService.Units">
+                    <ReferentialConstraint Property="QuarantineTimeUnit_UnitCode" ReferencedProperty="UnitCode"/>
+                </NavigationProperty>
+                <Property Name="QuarantineTimeUnit_UnitCode" Type="Edm.String" MaxLength="3"/>
+                <Property Name="QualityInspectionGroup" Type="Edm.String" MaxLength="4"/>
+                <Property Name="SerialNoProfile" Type="Edm.String" MaxLength="4"/>
+                <NavigationProperty Name="LogisticsUnitOfMeasure" Type="LoadingService.Units">
+                    <ReferentialConstraint Property="LogisticsUnitOfMeasure_UnitCode" ReferencedProperty="UnitCode"/>
+                </NavigationProperty>
+                <Property Name="LogisticsUnitOfMeasure_UnitCode" Type="Edm.String" MaxLength="3"/>
+                <Property Name="LoadingUnits" Type="Edm.String" MaxLength="8"/>
+                <Property Name="LoadingUnitGroup" Type="Edm.String" MaxLength="3"/>
+                <Property Name="MainSize" Type="Edm.String" MaxLength="20"/>
+                <Property Name="SecondSize" Type="Edm.String" MaxLength="20"/>
+                <Property Name="FreeCharactValue" Type="Edm.String" MaxLength="20"/>
+                <Property Name="CareCode" Type="Edm.String" MaxLength="16"/>
+                <Property Name="Brand" Type="Edm.String" MaxLength="4"/>
+                <Property Name="CorporateBrand" Type="Edm.String" MaxLength="10"/>
+                <Property Name="BrandDenomination" Type="Edm.String" MaxLength="10"/>
+                <Property Name="BrandedActiveIngredient" Type="Edm.String" MaxLength="10"/>
+                <Property Name="ProductTechnologyCenter" Type="Edm.String" MaxLength="10"/>
+                <Property Name="HandlingUnitType2" Type="Edm.String" MaxLength="5"/>
+                <Property Name="SupportedWeight" Type="Edm.Decimal" Precision="13" Scale="3"/>
+                <NavigationProperty Name="UomSupportWeight" Type="LoadingService.Units">
+                    <ReferentialConstraint Property="UomSupportWeight_UnitCode" ReferencedProperty="UnitCode"/>
+                </NavigationProperty>
+                <Property Name="UomSupportWeight_UnitCode" Type="Edm.String" MaxLength="3"/>
+                <Property Name="RfidStatus" Type="Edm.String" MaxLength="1"/>
+                <Property Name="ShortDescription" Type="Edm.String" MaxLength="20"/>
+                <Property Name="FieldDescription" Type="Edm.String" MaxLength="50"/>
+                <Property Name="MaterialDescription" Type="Edm.String"/>
+                <Property Name="PackBoxType" Type="Edm.String" MaxLength="10"/>
+                <Property Name="IsWeighted" Type="Edm.String" MaxLength="1"/>
+                <NavigationProperty Name="texts" Type="Collection(LoadingService.Materials_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="LoadingService.Materials_texts">
+                    <ReferentialConstraint Property="Material" ReferencedProperty="Material"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="Units">
+                <Key>
+                    <PropertyRef Name="UnitCode"/>
+                </Key>
+                <Property Name="UnitCode" Type="Edm.String" MaxLength="3" Nullable="false"/>
+                <Property Name="Commercial" Type="Edm.String" MaxLength="3"/>
+                <Property Name="Technical" Type="Edm.String" MaxLength="6"/>
+                <Property Name="MeasUnitText" Type="Edm.String"/>
+                <Property Name="UnitText" Type="Edm.String"/>
+                <NavigationProperty Name="texts" Type="Collection(LoadingService.Units_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="LoadingService.Units_texts">
+                    <ReferentialConstraint Property="UnitCode" ReferencedProperty="UnitCode"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="MaterialStorageTypes">
+                <Key>
+                    <PropertyRef Name="Material_Material"/>
+                    <PropertyRef Name="WarehouseNumber_WarehouseNumber"/>
+                    <PropertyRef Name="StorageType"/>
+                </Key>
+                <NavigationProperty Name="Material" Type="LoadingService.Materials">
+                    <ReferentialConstraint Property="Material_Material" ReferencedProperty="Material"/>
+                </NavigationProperty>
+                <Property Name="Material_Material" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <NavigationProperty Name="WarehouseNumber" Type="LoadingService.Warehouses">
+                    <ReferentialConstraint Property="WarehouseNumber_WarehouseNumber" ReferencedProperty="WarehouseNumber"/>
+                </NavigationProperty>
+                <Property Name="WarehouseNumber_WarehouseNumber" Type="Edm.String" MaxLength="3" Nullable="false"/>
+                <Property Name="StorageType" Type="Edm.String" MaxLength="3" Nullable="false"/>
+                <Property Name="StorageBin" Type="Edm.String" MaxLength="10"/>
+                <Property Name="MaximumBinQuantity" Type="Edm.Decimal" Precision="13" Scale="3"/>
+                <Property Name="MinimumBinQuantity" Type="Edm.Decimal" Precision="13" Scale="3"/>
+                <Property Name="ControlQuantity" Type="Edm.Decimal" Precision="13" Scale="3"/>
+                <Property Name="ReplenishmentQty" Type="Edm.Decimal" Precision="13" Scale="3"/>
+                <Property Name="PickingArea" Type="Edm.String" MaxLength="3"/>
+                <Property Name="DeleteFlag" Type="Edm.String" MaxLength="1"/>
+            </EntityType>
+            <EntityType Name="MaterialWarehouses">
+                <Key>
+                    <PropertyRef Name="Material_Material"/>
+                    <PropertyRef Name="WarehouseNumber_WarehouseNumber"/>
+                </Key>
+                <NavigationProperty Name="Material" Type="LoadingService.Materials">
+                    <ReferentialConstraint Property="Material_Material" ReferencedProperty="Material"/>
+                </NavigationProperty>
+                <Property Name="Material_Material" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <NavigationProperty Name="WarehouseNumber" Type="LoadingService.Warehouses">
+                    <ReferentialConstraint Property="WarehouseNumber_WarehouseNumber" ReferencedProperty="WarehouseNumber"/>
+                </NavigationProperty>
+                <Property Name="WarehouseNumber_WarehouseNumber" Type="Edm.String" MaxLength="3" Nullable="false"/>
+                <Property Name="DelflagWarehseNo" Type="Edm.String" MaxLength="1"/>
+                <Property Name="StorageSectionInd" Type="Edm.String" MaxLength="3"/>
+                <Property Name="StockPlacement" Type="Edm.String" MaxLength="3"/>
+                <Property Name="StockRemoval" Type="Edm.String" MaxLength="3"/>
+                <NavigationProperty Name="UnitOfMeasure" Type="LoadingService.Units">
+                    <ReferentialConstraint Property="UnitOfMeasure_UnitCode" ReferencedProperty="UnitCode"/>
+                </NavigationProperty>
+                <Property Name="UnitOfMeasure_UnitCode" Type="Edm.String" MaxLength="3"/>
+                <Property Name="StorageUnitType" Type="Edm.String" MaxLength="3"/>
+                <NavigationProperty Name="WmUnit" Type="LoadingService.Units">
+                    <ReferentialConstraint Property="WmUnit_UnitCode" ReferencedProperty="UnitCode"/>
+                </NavigationProperty>
+                <Property Name="WmUnit_UnitCode" Type="Edm.String" MaxLength="3"/>
+                <Property Name="AllowAddnToStock" Type="Edm.String" MaxLength="1"/>
+                <Property Name="BulkStorage" Type="Edm.String" MaxLength="2"/>
+                <Property Name="CapacityUsage" Type="Edm.Decimal" Precision="11" Scale="3"/>
+                <NavigationProperty Name="CapconsumptionUnit" Type="LoadingService.Units">
+                    <ReferentialConstraint Property="CapconsumptionUnit_UnitCode" ReferencedProperty="UnitCode"/>
+                </NavigationProperty>
+                <Property Name="CapconsumptionUnit_UnitCode" Type="Edm.String" MaxLength="3"/>
+                <Property Name="PickingStorageType" Type="Edm.String" MaxLength="3"/>
+                <Property Name="ProposedUomFromMat" Type="Edm.String" MaxLength="1"/>
+                <Property Name="StepPicking" Type="Edm.String" MaxLength="1"/>
+            </EntityType>
+            <EntityType Name="MaterialUnits">
+                <Key>
+                    <PropertyRef Name="Material_Material"/>
+                    <PropertyRef Name="Alternativeunit_UnitCode"/>
+                </Key>
+                <NavigationProperty Name="Material" Type="LoadingService.Materials">
+                    <ReferentialConstraint Property="Material_Material" ReferencedProperty="Material"/>
+                </NavigationProperty>
+                <Property Name="Material_Material" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <NavigationProperty Name="Alternativeunit" Type="LoadingService.Units">
+                    <ReferentialConstraint Property="Alternativeunit_UnitCode" ReferencedProperty="UnitCode"/>
+                </NavigationProperty>
+                <Property Name="Alternativeunit_UnitCode" Type="Edm.String" MaxLength="3" Nullable="false"/>
+                <Property Name="Numerator" Type="Edm.Decimal" Precision="5" Scale="0"/>
+                <Property Name="Denominator" Type="Edm.Decimal" Precision="5" Scale="0"/>
+                <Property Name="EanNumber" Type="Edm.String" MaxLength="15"/>
+                <Property Name="EanUpc" Type="Edm.String" MaxLength="20"/>
+                <Property Name="EanCategory" Type="Edm.String" MaxLength="5"/>
+                <Property Name="Length" Type="Edm.Decimal" Precision="13" Scale="3"/>
+                <Property Name="Width" Type="Edm.Decimal" Precision="13" Scale="3"/>
+                <Property Name="Height" Type="Edm.Decimal" Precision="13" Scale="3"/>
+                <NavigationProperty Name="Unit" Type="LoadingService.Units">
+                    <ReferentialConstraint Property="Unit_UnitCode" ReferencedProperty="UnitCode"/>
+                </NavigationProperty>
+                <Property Name="Unit_UnitCode" Type="Edm.String" MaxLength="3"/>
+                <Property Name="Volume" Type="Edm.Decimal" Precision="13" Scale="3"/>
+                <NavigationProperty Name="VolumeUnit" Type="LoadingService.Units">
+                    <ReferentialConstraint Property="VolumeUnit_UnitCode" ReferencedProperty="UnitCode"/>
+                </NavigationProperty>
+                <Property Name="VolumeUnit_UnitCode" Type="Edm.String" MaxLength="3"/>
+                <Property Name="GrossWeight" Type="Edm.Decimal" Precision="13" Scale="3"/>
+                <NavigationProperty Name="WeightUnit" Type="LoadingService.Units">
+                    <ReferentialConstraint Property="WeightUnit_UnitCode" ReferencedProperty="UnitCode"/>
+                </NavigationProperty>
+                <Property Name="WeightUnit_UnitCode" Type="Edm.String" MaxLength="3"/>
+                <NavigationProperty Name="LowerLevUnit" Type="LoadingService.Units">
+                    <ReferentialConstraint Property="LowerLevUnit_UnitCode" ReferencedProperty="UnitCode"/>
+                </NavigationProperty>
+                <Property Name="LowerLevUnit_UnitCode" Type="Edm.String" MaxLength="3"/>
+                <Property Name="InternalChar" Type="Edm.String" MaxLength="10"/>
+                <Property Name="UomSortNo" Type="Edm.Int32"/>
+                <Property Name="LeadingUn" Type="Edm.String" MaxLength="1"/>
+                <Property Name="ValuatedUn" Type="Edm.String" MaxLength="1"/>
+                <Property Name="UnitsMeasUse" Type="Edm.String" MaxLength="1"/>
+                <NavigationProperty Name="UnitOfMeasmnt" Type="LoadingService.Units">
+                    <ReferentialConstraint Property="UnitOfMeasmnt_UnitCode" ReferencedProperty="UnitCode"/>
+                </NavigationProperty>
+                <Property Name="UnitOfMeasmnt_UnitCode" Type="Edm.String" MaxLength="3"/>
+                <Property Name="LogVariants" Type="Edm.String" MaxLength="1"/>
+                <Property Name="EanVariant" Type="Edm.String" MaxLength="2"/>
+                <Property Name="RemVolNest" Type="Edm.Decimal" Precision="3" Scale="0"/>
+                <Property Name="MaxStackFact" Type="Edm.Int32"/>
+                <Property Name="CapacUsage" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <Property Name="UomCategory" Type="Edm.String" MaxLength="1"/>
+            </EntityType>
+            <EntityType Name="Warehouses">
+                <Key>
+                    <PropertyRef Name="WarehouseNumber"/>
+                </Key>
+                <Property Name="WarehouseNumber" Type="Edm.String" MaxLength="3" Nullable="false"/>
+                <Property Name="Region" Type="Edm.String" MaxLength="3"/>
+                <Property Name="WhseNoDescr" Type="Edm.String"/>
+                <NavigationProperty Name="texts" Type="Collection(LoadingService.Warehouses_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="LoadingService.Warehouses_texts">
+                    <ReferentialConstraint Property="WarehouseNumber" ReferencedProperty="WarehouseNumber"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="Quants">
+                <Key>
+                    <PropertyRef Name="WarehouseNumber_WarehouseNumber"/>
+                    <PropertyRef Name="Quant"/>
+                </Key>
+                <NavigationProperty Name="WarehouseNumber" Type="LoadingService.Warehouses">
+                    <ReferentialConstraint Property="WarehouseNumber_WarehouseNumber" ReferencedProperty="WarehouseNumber"/>
+                </NavigationProperty>
+                <Property Name="WarehouseNumber_WarehouseNumber" Type="Edm.String" MaxLength="3" Nullable="false"/>
+                <Property Name="Quant" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <NavigationProperty Name="Material" Type="LoadingService.Materials">
+                    <ReferentialConstraint Property="Material_Material" ReferencedProperty="Material"/>
+                </NavigationProperty>
+                <Property Name="Material_Material" Type="Edm.String" MaxLength="50"/>
+                <Property Name="Plant" Type="Edm.String" MaxLength="4"/>
+                <Property Name="Batch" Type="Edm.String" MaxLength="10"/>
+                <Property Name="StockCategory" Type="Edm.String" MaxLength="1"/>
+                <Property Name="StorageType" Type="Edm.String" MaxLength="3"/>
+                <Property Name="StorageBin" Type="Edm.String" MaxLength="10"/>
+                <Property Name="PutawayBlock" Type="Edm.String" MaxLength="1"/>
+                <Property Name="StockRemovalBlock" Type="Edm.String" MaxLength="1"/>
+                <Property Name="CurrentStockPlcmnt" Type="Edm.String" MaxLength="1"/>
+                <Property Name="CurrentStkRemoval" Type="Edm.String" MaxLength="1"/>
+                <Property Name="InventoryActive" Type="Edm.String" MaxLength="1"/>
+                <Property Name="BlockingReason" Type="Edm.String" MaxLength="1"/>
+                <Property Name="LastMovement" Type="Edm.Date"/>
+                <Property Name="Time1" Type="Edm.TimeOfDay"/>
+                <Property Name="TransferOrderItem" Type="Edm.String" MaxLength="4"/>
+                <Property Name="LastStockPlacement" Type="Edm.Date"/>
+                <Property Name="LastStockRemoval" Type="Edm.Date"/>
+                <Property Name="Time2" Type="Edm.TimeOfDay"/>
+                <Property Name="Time3" Type="Edm.TimeOfDay"/>
+                <Property Name="LastAddtnToStock" Type="Edm.Date"/>
+                <Property Name="GrDate" Type="Edm.Date"/>
+                <Property Name="GrNumber" Type="Edm.String" MaxLength="10"/>
+                <Property Name="GoodsReceiptItem" Type="Edm.String" MaxLength="4"/>
+                <Property Name="StorageUnitType" Type="Edm.String" MaxLength="3"/>
+                <NavigationProperty Name="BaseUnitOfMeasure" Type="LoadingService.Units">
+                    <ReferentialConstraint Property="BaseUnitOfMeasure_UnitCode" ReferencedProperty="UnitCode"/>
+                </NavigationProperty>
+                <Property Name="BaseUnitOfMeasure_UnitCode" Type="Edm.String" MaxLength="3"/>
+                <Property Name="TotalStock" Type="Edm.Decimal" Precision="13" Scale="3"/>
+                <Property Name="AvailableStock" Type="Edm.Decimal" Precision="13" Scale="3"/>
+                <Property Name="StockForPutaway" Type="Edm.Decimal" Precision="13" Scale="3"/>
+                <Property Name="PickQuantity" Type="Edm.Decimal" Precision="13" Scale="3"/>
+                <Property Name="Weight" Type="Edm.Decimal" Precision="11" Scale="3"/>
+                <NavigationProperty Name="WeightUnit" Type="LoadingService.Units">
+                    <ReferentialConstraint Property="WeightUnit_UnitCode" ReferencedProperty="UnitCode"/>
+                </NavigationProperty>
+                <Property Name="WeightUnit_UnitCode" Type="Edm.String" MaxLength="3"/>
+                <Property Name="TrNumber" Type="Edm.String" MaxLength="10"/>
+                <Property Name="InventoryRecord" Type="Edm.String" MaxLength="10"/>
+                <Property Name="InventoryItem" Type="Edm.String" MaxLength="4"/>
+                <Property Name="StorageUnit" Type="Edm.String" MaxLength="20"/>
+                <Property Name="SledBbd" Type="Edm.Date"/>
+                <Property Name="StorageLocation" Type="Edm.String" MaxLength="4"/>
+                <Property Name="GrDataInitial" Type="Edm.String" MaxLength="1"/>
+                <Property Name="TransferQuantity" Type="Edm.Decimal" Precision="13" Scale="3"/>
+            </EntityType>
+            <EntityType Name="StorageBins">
+                <Key>
+                    <PropertyRef Name="WarehouseNumber_WarehouseNumber"/>
+                    <PropertyRef Name="StorageType"/>
+                    <PropertyRef Name="StorageBin"/>
+                </Key>
+                <NavigationProperty Name="WarehouseNumber" Type="LoadingService.Warehouses">
+                    <ReferentialConstraint Property="WarehouseNumber_WarehouseNumber" ReferencedProperty="WarehouseNumber"/>
+                </NavigationProperty>
+                <Property Name="WarehouseNumber_WarehouseNumber" Type="Edm.String" MaxLength="3" Nullable="false"/>
+                <Property Name="StorageType" Type="Edm.String" MaxLength="3" Nullable="false"/>
+                <Property Name="StorageBin" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="StorageSection" Type="Edm.String" MaxLength="3"/>
+                <Property Name="StorageBinType" Type="Edm.String" MaxLength="2"/>
+                <Property Name="BinSection" Type="Edm.String" MaxLength="1"/>
+                <Property Name="StockRemovalBlock" Type="Edm.String" MaxLength="1"/>
+                <Property Name="PutawayBlock" Type="Edm.String" MaxLength="1"/>
+                <Property Name="CurrentStockPlcmnt" Type="Edm.String" MaxLength="1"/>
+                <Property Name="InventoryActive" Type="Edm.String" MaxLength="1"/>
+                <Property Name="NumberOfQuants" Type="Edm.Decimal" Precision="7" Scale="0"/>
+                <Property Name="MaxnumberOfQuants" Type="Edm.Decimal" Precision="7" Scale="0"/>
+                <Property Name="MaximumNoofSus" Type="Edm.Decimal" Precision="5" Scale="3"/>
+                <Property Name="DynamicStorageBin" Type="Edm.String" MaxLength="1"/>
+                <Property Name="MaximumWeight" Type="Edm.Decimal" Precision="11" Scale="3"/>
+                <Property Name="WeightUnit" Type="Edm.String" MaxLength="3"/>
+                <Property Name="OccupiedWeight" Type="Edm.Decimal" Precision="11" Scale="3"/>
+                <Property Name="TotalCapacity" Type="Edm.Decimal" Precision="11" Scale="3"/>
+                <Property Name="RemainingCapacity" Type="Edm.Decimal" Precision="11" Scale="3"/>
+                <Property Name="PickingArea" Type="Edm.String" MaxLength="3"/>
+                <Property Name="Zone" Type="Edm.String" MaxLength="10"/>
+                <Property Name="XCoordinate" Type="Edm.Decimal" Precision="10" Scale="3"/>
+                <Property Name="YCoordinate" Type="Edm.Decimal" Precision="10" Scale="3"/>
+                <Property Name="ZCoordinate" Type="Edm.Decimal" Precision="10" Scale="3"/>
+            </EntityType>
+            <EntityType Name="StorageUnits">
+                <Key>
+                    <PropertyRef Name="StorageUnit"/>
+                </Key>
+                <Property Name="StorageUnit" Type="Edm.String" MaxLength="20" Nullable="false"/>
+                <NavigationProperty Name="WarehouseNumber" Type="LoadingService.Warehouses">
+                    <ReferentialConstraint Property="WarehouseNumber_WarehouseNumber" ReferencedProperty="WarehouseNumber"/>
+                </NavigationProperty>
+                <Property Name="WarehouseNumber_WarehouseNumber" Type="Edm.String" MaxLength="3"/>
+                <Property Name="StorUnitType" Type="Edm.String" MaxLength="3"/>
+                <Property Name="StorageType" Type="Edm.String" MaxLength="3"/>
+                <Property Name="StorageBin" Type="Edm.String" MaxLength="10"/>
+                <Property Name="RemovalBlock" Type="Edm.String" MaxLength="1"/>
+                <Property Name="PutawayBlock" Type="Edm.String" MaxLength="1"/>
+                <Property Name="Blkreason" Type="Edm.String" MaxLength="1"/>
+                <Property Name="Status" Type="Edm.String" MaxLength="1"/>
+                <Property Name="NoOfQuants" Type="Edm.Decimal" Precision="7" Scale="0"/>
+                <Property Name="LastMovement" Type="Edm.Date"/>
+                <Property Name="Time" Type="Edm.TimeOfDay"/>
+                <Property Name="ToNumber" Type="Edm.String" MaxLength="10"/>
+                <Property Name="Transorditem" Type="Edm.String" MaxLength="4"/>
+                <Property Name="OccupiedWeight" Type="Edm.Decimal" Precision="11" Scale="3"/>
+                <NavigationProperty Name="WeightUnit" Type="LoadingService.Units">
+                    <ReferentialConstraint Property="WeightUnit_UnitCode" ReferencedProperty="UnitCode"/>
+                </NavigationProperty>
+                <Property Name="WeightUnit_UnitCode" Type="Edm.String" MaxLength="3"/>
+                <Property Name="BinPosition" Type="Edm.String" MaxLength="2"/>
+                <Property Name="OpenToItems" Type="Edm.Decimal" Precision="5" Scale="0"/>
+                <Property Name="Group" Type="Edm.String" MaxLength="10"/>
+                <Property Name="PostingChgTy" Type="Edm.String" MaxLength="3"/>
+                <Property Name="PostingChgNin" Type="Edm.String" MaxLength="10"/>
+                <Property Name="CapacusageSut" Type="Edm.Decimal" Precision="11" Scale="3"/>
+                <Property Name="OldCapacityUsage" Type="Edm.Decimal" Precision="11" Scale="3"/>
+                <Property Name="DestbinChgble" Type="Edm.String" MaxLength="1"/>
+                <Property Name="PosInTrBin" Type="Edm.String" MaxLength="2"/>
+                <Property Name="Quant" Type="Edm.String" MaxLength="10"/>
+                <Property Name="StortypeForgr" Type="Edm.String" MaxLength="3"/>
+                <Property Name="StorbinForGr" Type="Edm.String" MaxLength="10"/>
+                <Property Name="GrStatus" Type="Edm.String" MaxLength="1"/>
+                <Property Name="QuantsWOGr" Type="Edm.Decimal" Precision="7" Scale="0"/>
+                <Property Name="Delivery" Type="Edm.String" MaxLength="10"/>
+            </EntityType>
+            <EntityType Name="SalesDocuments">
+                <Key>
+                    <PropertyRef Name="SalesDocument"/>
+                </Key>
+                <Property Name="SalesDocument" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="CreatedOn" Type="Edm.Date"/>
+                <Property Name="Time" Type="Edm.TimeOfDay"/>
+                <Property Name="CreatedBy" Type="Edm.String" MaxLength="12"/>
+                <Property Name="DocumentDate" Type="Edm.Date"/>
+                <Property Name="SdDocumentCateg" Type="Edm.String" MaxLength="1"/>
+                <Property Name="TransactionGroup" Type="Edm.String" MaxLength="1"/>
+                <Property Name="SalesDocumentType" Type="Edm.String" MaxLength="4"/>
+                <Property Name="OrderReason" Type="Edm.String" MaxLength="3"/>
+                <Property Name="NetValue" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="DocumentCurrency" Type="Edm.String" MaxLength="5"/>
+                <Property Name="SalesOrganization" Type="Edm.String" MaxLength="4"/>
+                <Property Name="DistributionChannel" Type="Edm.String" MaxLength="2"/>
+                <Property Name="Division" Type="Edm.String" MaxLength="2"/>
+                <Property Name="SalesGroup" Type="Edm.String" MaxLength="3"/>
+                <Property Name="SalesOffice" Type="Edm.String" MaxLength="4"/>
+                <Property Name="ValidFromDate" Type="Edm.Date"/>
+                <Property Name="ValidToDate" Type="Edm.Date"/>
+                <Property Name="RequestedDelivDate" Type="Edm.Date"/>
+                <Property Name="CompleteDelivery" Type="Edm.String" MaxLength="1"/>
+                <Property Name="ShippingConditions" Type="Edm.String" MaxLength="2"/>
+                <Property Name="PurchaseOrderNo" Type="Edm.String" MaxLength="20"/>
+                <Property Name="PurchaseOrderType" Type="Edm.String" MaxLength="4"/>
+                <Property Name="PurchaseOrderDate" Type="Edm.Date"/>
+                <Property Name="Supplement" Type="Edm.String" MaxLength="4"/>
+                <Property Name="YourReference" Type="Edm.String" MaxLength="12"/>
+                <Property Name="NameOfTheOrderer" Type="Edm.String" MaxLength="35"/>
+                <Property Name="SoldToParty" Type="Edm.String" MaxLength="10"/>
+                <Property Name="ChangedOn" Type="Edm.Date"/>
+                <Property Name="Reference" Type="Edm.String" MaxLength="20"/>
+                <Property Name="Order" Type="Edm.String" MaxLength="20"/>
+                <Property Name="ExpirationDate" Type="Edm.Date"/>
+                <Property Name="Route" Type="Edm.String" MaxLength="10"/>
+                <Property Name="RouteBalancingFlag" Type="Edm.String" MaxLength="1"/>
+                <Property Name="Route2" Type="Edm.String" MaxLength="10"/>
+                <Property Name="DeliveringPlant" Type="Edm.String" MaxLength="10"/>
+                <Property Name="TransportationZone" Type="Edm.String" MaxLength="10"/>
+                <Property Name="HomogeneousNonHomogeneous" Type="Edm.String" MaxLength="1"/>
+                <Property Name="OrderCategory" Type="Edm.String" MaxLength="2"/>
+                <Property Name="OrderPalletStatus" Type="Edm.String" MaxLength="1"/>
+                <Property Name="NoOfPalletsIncludingIntPallets" Type="Edm.String" MaxLength="50"/>
+                <NavigationProperty Name="WeightUnit" Type="LoadingService.Units">
+                    <ReferentialConstraint Property="WeightUnit_UnitCode" ReferencedProperty="UnitCode"/>
+                </NavigationProperty>
+                <Property Name="WeightUnit_UnitCode" Type="Edm.String" MaxLength="3"/>
+                <Property Name="VuInFootprints" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <Property Name="WeightOfTheFootprintInKg" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <Property Name="VehicleType" Type="Edm.String" MaxLength="5"/>
+                <Property Name="CalculatedWeight" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <NavigationProperty Name="WeightUnit2" Type="LoadingService.Units">
+                    <ReferentialConstraint Property="WeightUnit2_UnitCode" ReferencedProperty="UnitCode"/>
+                </NavigationProperty>
+                <Property Name="WeightUnit2_UnitCode" Type="Edm.String" MaxLength="3"/>
+                <Property Name="ArrivalDate" Type="Edm.Date"/>
+                <Property Name="BusinessTransactionType" Type="Edm.String" MaxLength="50"/>
+                <Property Name="Description" Type="Edm.String" MaxLength="50"/>
+                <Property Name="TransshipmentArrivalDate" Type="Edm.Date"/>
+                <Property Name="TransshipmentDepartDate" Type="Edm.Date"/>
+                <Property Name="TransshipmentPlaceOfArrival" Type="Edm.String" MaxLength="10"/>
+                <Property Name="TransshipmentPlaceOfLoading" Type="Edm.String" MaxLength="10"/>
+                <Property Name="TransshipmentTransportMean" Type="Edm.String" MaxLength="50"/>
+                <Property Name="DeleteIndicator" Type="Edm.String" MaxLength="1"/>
+                <NavigationProperty Name="To_SalesDocumentItems" Type="Collection(LoadingService.SalesDocumentItems)" Partner="SalesDocument"/>
+            </EntityType>
+            <EntityType Name="SalesDocumentItems">
+                <Key>
+                    <PropertyRef Name="SalesDocument_SalesDocument"/>
+                    <PropertyRef Name="SalesDocumentItem"/>
+                </Key>
+                <NavigationProperty Name="SalesDocument" Type="LoadingService.SalesDocuments" Partner="To_SalesDocumentItems">
+                    <ReferentialConstraint Property="SalesDocument_SalesDocument" ReferencedProperty="SalesDocument"/>
+                </NavigationProperty>
+                <Property Name="SalesDocument_SalesDocument" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="SalesDocumentItem" Type="Edm.String" MaxLength="6" Nullable="false"/>
+                <NavigationProperty Name="Material" Type="LoadingService.Materials">
+                    <ReferentialConstraint Property="Material_Material" ReferencedProperty="Material"/>
+                </NavigationProperty>
+                <Property Name="Material_Material" Type="Edm.String" MaxLength="50"/>
+                <Property Name="Batch" Type="Edm.String" MaxLength="10"/>
+                <Property Name="MaterialGroup" Type="Edm.String" MaxLength="9"/>
+                <Property Name="Description" Type="Edm.String" MaxLength="40"/>
+                <Property Name="ItemCategory" Type="Edm.String" MaxLength="4"/>
+                <Property Name="ItemType" Type="Edm.String" MaxLength="1"/>
+                <Property Name="ItmRelevforDeliv" Type="Edm.String" MaxLength="1"/>
+                <Property Name="RelevantForBilling" Type="Edm.String" MaxLength="1"/>
+                <NavigationProperty Name="TargetQuantityUom" Type="LoadingService.Units">
+                    <ReferentialConstraint Property="TargetQuantityUom_UnitCode" ReferencedProperty="UnitCode"/>
+                </NavigationProperty>
+                <Property Name="TargetQuantityUom_UnitCode" Type="Edm.String" MaxLength="3"/>
+                <Property Name="ConversionFactor" Type="Edm.Decimal" Precision="5"/>
+                <Property Name="ConversionFactor2" Type="Edm.Decimal" Precision="5"/>
+                <NavigationProperty Name="BaseUnitOfMeasure" Type="LoadingService.Units">
+                    <ReferentialConstraint Property="BaseUnitOfMeasure_UnitCode" ReferencedProperty="UnitCode"/>
+                </NavigationProperty>
+                <Property Name="BaseUnitOfMeasure_UnitCode" Type="Edm.String" MaxLength="3"/>
+                <Property Name="PurchaseOrderItem" Type="Edm.String" MaxLength="10"/>
+                <Property Name="CustomerMaterialNumber" Type="Edm.String" MaxLength="20"/>
+                <Property Name="DeliveryGroup" Type="Edm.String" MaxLength="3"/>
+                <Property Name="QuantityIsFixed" Type="Edm.String" MaxLength="1"/>
+                <Property Name="UnlimitedTolerance" Type="Edm.String" MaxLength="1"/>
+                <Property Name="OverdelivTolerance" Type="Edm.Decimal" Precision="3" Scale="1"/>
+                <Property Name="UnderdelTolerance" Type="Edm.Decimal" Precision="3" Scale="1"/>
+                <Property Name="BillingBlock" Type="Edm.String" MaxLength="2"/>
+                <Property Name="ReplacementPart" Type="Edm.String" MaxLength="1"/>
+                <Property Name="BillingMethCoPpc" Type="Edm.String" MaxLength="1"/>
+                <Property Name="Division" Type="Edm.String" MaxLength="2"/>
+                <Property Name="BusinessArea" Type="Edm.String" MaxLength="4"/>
+                <Property Name="NetValue" Type="Edm.Decimal" Precision="15" Scale="2"/>
+                <Property Name="DocumentCurrency" Type="Edm.String" MaxLength="5"/>
+                <Property Name="Maxpartdeliveries" Type="Edm.Decimal" Precision="1" Scale="0"/>
+                <Property Name="PartdlvItem" Type="Edm.String" MaxLength="1"/>
+                <Property Name="BatchSplitAllowed" Type="Edm.String" MaxLength="1"/>
+                <Property Name="OrderQuantity" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <Property Name="RequiredDelivQty" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <NavigationProperty Name="SalesUnit" Type="LoadingService.Units">
+                    <ReferentialConstraint Property="SalesUnit_UnitCode" ReferencedProperty="UnitCode"/>
+                </NavigationProperty>
+                <Property Name="SalesUnit_UnitCode" Type="Edm.String" MaxLength="3"/>
+                <Property Name="Numerator" Type="Edm.Decimal" Precision="5" Scale="0"/>
+                <Property Name="Denominator" Type="Edm.Decimal" Precision="5" Scale="0"/>
+                <Property Name="GrossWeight" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <Property Name="NetWeight" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <NavigationProperty Name="WeightUnit" Type="LoadingService.Units">
+                    <ReferentialConstraint Property="WeightUnit_UnitCode" ReferencedProperty="UnitCode"/>
+                </NavigationProperty>
+                <Property Name="WeightUnit_UnitCode" Type="Edm.String" MaxLength="3"/>
+                <Property Name="Volume" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <NavigationProperty Name="VolumeUnit" Type="LoadingService.Units">
+                    <ReferentialConstraint Property="VolumeUnit_UnitCode" ReferencedProperty="UnitCode"/>
+                </NavigationProperty>
+                <Property Name="VolumeUnit_UnitCode" Type="Edm.String" MaxLength="3"/>
+                <Property Name="OriginatingDocument" Type="Edm.String" MaxLength="10"/>
+                <Property Name="Item" Type="Edm.String" MaxLength="6"/>
+                <Property Name="ReferenceDocument" Type="Edm.String" MaxLength="10"/>
+                <Property Name="ReferenceItem" Type="Edm.String" MaxLength="6"/>
+                <Property Name="CompleteReference" Type="Edm.String" MaxLength="1"/>
+                <Property Name="UpdateDocumentFlow" Type="Edm.String" MaxLength="1"/>
+                <Property Name="CompletionRule" Type="Edm.String" MaxLength="1"/>
+                <Property Name="DeliveryPriority" Type="Edm.String" MaxLength="2"/>
+                <Property Name="Plant" Type="Edm.String" MaxLength="4"/>
+                <Property Name="StorageLocation" Type="Edm.String" MaxLength="4"/>
+                <Property Name="ShippingPointReceivingPt" Type="Edm.String" MaxLength="4"/>
+                <Property Name="Route" Type="Edm.String" MaxLength="6"/>
+                <Property Name="BomOrigin" Type="Edm.String" MaxLength="1"/>
+                <Property Name="BomKeyDate" Type="Edm.Date"/>
+                <Property Name="BillOfMaterial" Type="Edm.String" MaxLength="8"/>
+                <Property Name="BillOfMaterialItemNumber" Type="Edm.Decimal" Precision="5" Scale="0"/>
+                <Property Name="CreatedOn" Type="Edm.Date"/>
+                <Property Name="CreatedBy" Type="Edm.String" MaxLength="12"/>
+                <Property Name="Time" Type="Edm.TimeOfDay"/>
+                <NavigationProperty Name="UnitOfMeasure" Type="LoadingService.Units">
+                    <ReferentialConstraint Property="UnitOfMeasure_UnitCode" ReferencedProperty="UnitCode"/>
+                </NavigationProperty>
+                <Property Name="UnitOfMeasure_UnitCode" Type="Edm.String" MaxLength="3"/>
+                <Property Name="AvailabilityCheck" Type="Edm.String" MaxLength="2"/>
+                <Property Name="MaterialPricingGrp" Type="Edm.String" MaxLength="2"/>
+                <Property Name="AcctAssmtGrpMat" Type="Edm.String" MaxLength="2"/>
+                <Property Name="EanNumber" Type="Edm.String" MaxLength="13"/>
+                <Property Name="Pricing" Type="Edm.String" MaxLength="1"/>
+                <Property Name="ValuationType" Type="Edm.String" MaxLength="10"/>
+                <Property Name="SeparateValuation" Type="Edm.String" MaxLength="1"/>
+                <Property Name="BatchManagement" Type="Edm.String" MaxLength="1"/>
+                <Property Name="MinimumDeliveryQty" Type="Edm.Decimal" Precision="13" Scale="3"/>
+                <Property Name="ChangedOn" Type="Edm.Date"/>
+                <Property Name="EanUpc" Type="Edm.String" MaxLength="18"/>
+                <Property Name="Order" Type="Edm.String" MaxLength="12"/>
+                <Property Name="PlanningMaterial" Type="Edm.String" MaxLength="18"/>
+                <Property Name="PlanningPlant" Type="Edm.String" MaxLength="4"/>
+                <NavigationProperty Name="ProductGroupUnit" Type="LoadingService.Units">
+                    <ReferentialConstraint Property="ProductGroupUnit_UnitCode" ReferencedProperty="UnitCode"/>
+                </NavigationProperty>
+                <Property Name="ProductGroupUnit_UnitCode" Type="Edm.String" MaxLength="3"/>
+                <NavigationProperty Name="BaseUnitOfMeasure2" Type="LoadingService.Units">
+                    <ReferentialConstraint Property="BaseUnitOfMeasure2_UnitCode" ReferencedProperty="UnitCode"/>
+                </NavigationProperty>
+                <Property Name="BaseUnitOfMeasure2_UnitCode" Type="Edm.String" MaxLength="3"/>
+                <Property Name="Po" Type="Edm.String" MaxLength="20"/>
+                <Property Name="LoadingPoint" Type="Edm.String" MaxLength="5"/>
+                <Property Name="CheckRoute" Type="Edm.String" MaxLength="1"/>
+                <Property Name="SalesOrderStatus" Type="Edm.String" MaxLength="1"/>
+                <Property Name="VehicleType" Type="Edm.String" MaxLength="10"/>
+                <Property Name="DeliveryDate" Type="Edm.Date"/>
+                <Property Name="TripIdNumber" Type="Edm.String" MaxLength="10"/>
+                <Property Name="SledBbd" Type="Edm.Date"/>
+                <Property Name="Status" Type="Edm.String" MaxLength="10"/>
+                <Property Name="ServiceLevelIndicator" Type="Edm.String" MaxLength="10"/>
+                <Property Name="TargetQuantity" Type="Edm.Decimal" Precision="13" Scale="3"/>
+                <Property Name="DeleteIndicator" Type="Edm.String" MaxLength="1"/>
+            </EntityType>
+            <EntityType Name="Deliveries">
+                <Key>
+                    <PropertyRef Name="Delivery"/>
+                </Key>
+                <Property Name="Delivery" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="Createdby" Type="Edm.String" MaxLength="12"/>
+                <Property Name="Time" Type="Edm.TimeOfDay"/>
+                <Property Name="Createdon" Type="Edm.Date"/>
+                <Property Name="Salesdistrict" Type="Edm.String" MaxLength="6"/>
+                <Property Name="Shippingpoint" Type="Edm.String" MaxLength="4"/>
+                <Property Name="Salesorganization" Type="Edm.String" MaxLength="4"/>
+                <Property Name="Deliverytype" Type="Edm.String" MaxLength="4"/>
+                <Property Name="Completedelivery" Type="Edm.String" MaxLength="1"/>
+                <Property Name="Plandgdsmvmntdate" Type="Edm.Date"/>
+                <Property Name="Route" Type="Edm.String" MaxLength="6"/>
+                <Property Name="Billingblock" Type="Edm.String" MaxLength="2"/>
+                <Property Name="Deliveryblock" Type="Edm.String" MaxLength="2"/>
+                <Property Name="Sddocumentcateg" Type="Edm.String" MaxLength="1"/>
+                <Property Name="Shippingconditions" Type="Edm.String" MaxLength="2"/>
+                <Property Name="ShipToparty" Type="Edm.String" MaxLength="10"/>
+                <Property Name="SoldToparty" Type="Edm.String" MaxLength="10"/>
+                <Property Name="Totalweight" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <Property Name="Netweight" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <NavigationProperty Name="Weightunit" Type="LoadingService.Units">
+                    <ReferentialConstraint Property="Weightunit_UnitCode" ReferencedProperty="UnitCode"/>
+                </NavigationProperty>
+                <Property Name="Weightunit_UnitCode" Type="Edm.String" MaxLength="3"/>
+                <Property Name="Volume" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <NavigationProperty Name="Volumeunit" Type="LoadingService.Units">
+                    <ReferentialConstraint Property="Volumeunit_UnitCode" ReferencedProperty="UnitCode"/>
+                </NavigationProperty>
+                <Property Name="Volumeunit_UnitCode" Type="Edm.String" MaxLength="3"/>
+                <Property Name="Numberofpackages" Type="Edm.String" MaxLength="5"/>
+                <Property Name="Route2" Type="Edm.String" MaxLength="6"/>
+                <NavigationProperty Name="Warehousenumber" Type="LoadingService.Warehouses">
+                    <ReferentialConstraint Property="Warehousenumber_WarehouseNumber" ReferencedProperty="WarehouseNumber"/>
+                </NavigationProperty>
+                <Property Name="Warehousenumber_WarehouseNumber" Type="Edm.String" MaxLength="3"/>
+                <Property Name="IdDeliverysplit" Type="Edm.String" MaxLength="1"/>
+                <Property Name="Salesorganization2" Type="Edm.String" MaxLength="4"/>
+                <Property Name="DistribChannel" Type="Edm.String" MaxLength="2"/>
+                <Property Name="ExternalDeliveryid" Type="Edm.String" MaxLength="35"/>
+                <Property Name="Order" Type="Edm.String" MaxLength="12"/>
+                <Property Name="SearchProcedure" Type="Edm.String" MaxLength="6"/>
+                <Property Name="CorrectionDelivery" Type="Edm.String" MaxLength="1"/>
+                <Property Name="Procedure" Type="Edm.String" MaxLength="6"/>
+                <Property Name="DocConditionNo" Type="Edm.String" MaxLength="10"/>
+                <Property Name="Netvalue" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <Property Name="RouteSchedule" Type="Edm.String" MaxLength="10"/>
+                <Property Name="ReceivingPlant" Type="Edm.String" MaxLength="4"/>
+                <Property Name="FinancialDocNo" Type="Edm.String" MaxLength="10"/>
+                <Property Name="PaymtGuarantProc" Type="Edm.String" MaxLength="4"/>
+                <Property Name="PickingTime" Type="Edm.TimeOfDay"/>
+                <Property Name="TranspPlanTime" Type="Edm.TimeOfDay"/>
+                <Property Name="LoadingTime" Type="Edm.TimeOfDay"/>
+                <Property Name="GoodsissueTime" Type="Edm.TimeOfDay"/>
+                <Property Name="DoorforWhseNo" Type="Edm.String" MaxLength="3"/>
+                <Property Name="ShipmentInformationStatus" Type="Edm.String" MaxLength="1"/>
+                <Property Name="ReturnsasnCancelled" Type="Edm.String" MaxLength="1"/>
+                <Property Name="GoodsIssueTime2" Type="Edm.TimeOfDay"/>
+                <Property Name="TimeZone" Type="Edm.String" MaxLength="6"/>
+                <Property Name="StatusDecentWhse" Type="Edm.String" MaxLength="1"/>
+                <Property Name="ScenarioLogisticExecution" Type="Edm.String" MaxLength="1"/>
+                <Property Name="OriginalSystemType" Type="Edm.String" MaxLength="1"/>
+                <Property Name="LastChangerSystemType" Type="Edm.String" MaxLength="1"/>
+                <Property Name="GeographicalRoute" Type="Edm.String" MaxLength="10"/>
+                <Property Name="ChgIndforRoute" Type="Edm.String" MaxLength="1"/>
+                <Property Name="DeliveryDate" Type="Edm.Date"/>
+                <Property Name="SequenceRoute" Type="Edm.Int32"/>
+                <Property Name="IsMonoCustomer" Type="Edm.String" MaxLength="1"/>
+                <Property Name="DeleteIndicator" Type="Edm.String" MaxLength="1"/>
+                <NavigationProperty Name="To_DeliveryItems" Type="Collection(LoadingService.DeliveryItems)" Partner="Delivery"/>
+            </EntityType>
+            <EntityType Name="DeliveryItems">
+                <Key>
+                    <PropertyRef Name="Delivery_Delivery"/>
+                    <PropertyRef Name="Item"/>
+                </Key>
+                <NavigationProperty Name="Delivery" Type="LoadingService.Deliveries" Partner="To_DeliveryItems">
+                    <ReferentialConstraint Property="Delivery_Delivery" ReferencedProperty="Delivery"/>
+                </NavigationProperty>
+                <Property Name="Delivery_Delivery" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="Item" Type="Edm.String" MaxLength="6" Nullable="false"/>
+                <Property Name="ItemCategory" Type="Edm.String" MaxLength="4"/>
+                <Property Name="CreatedBy" Type="Edm.String" MaxLength="12"/>
+                <Property Name="Time" Type="Edm.TimeOfDay"/>
+                <Property Name="CreatedOn" Type="Edm.Date"/>
+                <NavigationProperty Name="Material" Type="LoadingService.Materials">
+                    <ReferentialConstraint Property="Material_Material" ReferencedProperty="Material"/>
+                </NavigationProperty>
+                <Property Name="Material_Material" Type="Edm.String" MaxLength="50"/>
+                <Property Name="Plant" Type="Edm.String" MaxLength="14"/>
+                <Property Name="StorageLocation" Type="Edm.String" MaxLength="4"/>
+                <Property Name="Batch" Type="Edm.String" MaxLength="10"/>
+                <Property Name="DeliveryQuantity" Type="Edm.Decimal" Precision="13" Scale="3"/>
+                <Property Name="DeliveryQuantityBaseUOM" Type="Edm.Decimal" Precision="13" Scale="3"/>
+                <NavigationProperty Name="BaseUnitOfMeasure" Type="LoadingService.Units">
+                    <ReferentialConstraint Property="BaseUnitOfMeasure_UnitCode" ReferencedProperty="UnitCode"/>
+                </NavigationProperty>
+                <Property Name="BaseUnitOfMeasure_UnitCode" Type="Edm.String" MaxLength="3"/>
+                <NavigationProperty Name="SalesUnit" Type="LoadingService.Units">
+                    <ReferentialConstraint Property="SalesUnit_UnitCode" ReferencedProperty="UnitCode"/>
+                </NavigationProperty>
+                <Property Name="SalesUnit_UnitCode" Type="Edm.String" MaxLength="3"/>
+                <Property Name="Numerator" Type="Edm.Decimal" Precision="5"/>
+                <Property Name="Denominator" Type="Edm.Decimal" Precision="5"/>
+                <Property Name="NetWeight" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <Property Name="GrossWeight" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <NavigationProperty Name="WeightUnit" Type="LoadingService.Units">
+                    <ReferentialConstraint Property="WeightUnit_UnitCode" ReferencedProperty="UnitCode"/>
+                </NavigationProperty>
+                <Property Name="WeightUnit_UnitCode" Type="Edm.String" MaxLength="3"/>
+                <Property Name="Volume" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <NavigationProperty Name="VolumeUnit" Type="LoadingService.Units">
+                    <ReferentialConstraint Property="VolumeUnit_UnitCode" ReferencedProperty="UnitCode"/>
+                </NavigationProperty>
+                <Property Name="VolumeUnit_UnitCode" Type="Edm.String" MaxLength="3"/>
+                <Property Name="PartdlvItem" Type="Edm.String" MaxLength="1"/>
+                <NavigationProperty Name="WarehouseNumber" Type="LoadingService.Warehouses">
+                    <ReferentialConstraint Property="WarehouseNumber_WarehouseNumber" ReferencedProperty="WarehouseNumber"/>
+                </NavigationProperty>
+                <Property Name="WarehouseNumber_WarehouseNumber" Type="Edm.String" MaxLength="3"/>
+                <Property Name="SplitToWarehouseNo" Type="Edm.String" MaxLength="1"/>
+                <Property Name="StorageType" Type="Edm.String" MaxLength="3"/>
+                <Property Name="StorageBin" Type="Edm.String" MaxLength="10"/>
+                <Property Name="MovementType" Type="Edm.String" MaxLength="3"/>
+                <Property Name="MovementType2" Type="Edm.String" MaxLength="3"/>
+                <Property Name="IndDynamicBin" Type="Edm.String" MaxLength="1"/>
+                <NavigationProperty Name="SalesOrder" Type="LoadingService.SalesDocuments">
+                    <ReferentialConstraint Property="SalesOrder_SalesDocument" ReferencedProperty="SalesDocument"/>
+                </NavigationProperty>
+                <Property Name="SalesOrder_SalesDocument" Type="Edm.String" MaxLength="10"/>
+                <Property Name="SalesOrderItem" Type="Edm.String" MaxLength="6"/>
+                <Property Name="DeleteIndicator" Type="Edm.String" MaxLength="1"/>
+                <NavigationProperty Name="To_SalesDocumentItem" Type="LoadingService.SalesDocumentItems">
+                    <ReferentialConstraint Property="SalesOrder_SalesDocument" ReferencedProperty="SalesDocument_SalesDocument"/>
+                    <ReferentialConstraint Property="SalesOrderItem" ReferencedProperty="SalesDocumentItem"/>
+                </NavigationProperty>
+                <Property Name="OpenQuantity" Type="Edm.Decimal" Precision="13" Scale="3"/>
+                <Property Name="IsPicked" Type="Edm.String" MaxLength="1"/>
+            </EntityType>
+            <EntityType Name="MaterialStorageLocation">
+                <Key>
+                    <PropertyRef Name="Material_Material"/>
+                    <PropertyRef Name="Plant"/>
+                    <PropertyRef Name="StorageLocation"/>
+                </Key>
+                <NavigationProperty Name="Material" Type="LoadingService.Materials">
+                    <ReferentialConstraint Property="Material_Material" ReferencedProperty="Material"/>
+                </NavigationProperty>
+                <Property Name="Material_Material" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="Plant" Type="Edm.String" MaxLength="4" Nullable="false"/>
+                <Property Name="StorageLocation" Type="Edm.String" MaxLength="4" Nullable="false"/>
+                <Property Name="MaintenanceStatus" Type="Edm.String" MaxLength="15"/>
+                <Property Name="PhysInvblock" Type="Edm.String" MaxLength="1"/>
+                <Property Name="Unrestrictred" Type="Edm.Decimal" Precision="13" Scale="3"/>
+                <Property Name="StockInTransfer" Type="Edm.Decimal" Precision="13" Scale="3"/>
+                <Property Name="StockInTransfer2" Type="Edm.Decimal" Precision="13" Scale="3"/>
+                <Property Name="InQualityInsp" Type="Edm.Decimal" Precision="13" Scale="3"/>
+                <Property Name="RestrictedUseStock" Type="Edm.Decimal" Precision="13" Scale="3"/>
+                <Property Name="Blocked" Type="Edm.Decimal" Precision="13" Scale="3"/>
+                <Property Name="Returns" Type="Edm.Decimal" Precision="13" Scale="3"/>
+                <Property Name="ReplenishmentQty" Type="Edm.Decimal" Precision="13" Scale="3"/>
+                <Property Name="StorageBin" Type="Edm.String" MaxLength="10"/>
+                <Property Name="pickingArea" Type="Edm.String" MaxLength="3"/>
+            </EntityType>
+            <EntityType Name="ReplenTR">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="TRNumber"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="TRNumber" Type="Edm.String" MaxLength="15" Nullable="false"/>
+                <NavigationProperty Name="Plant" Type="LoadingService.Plants">
+                    <ReferentialConstraint Property="Plant_Plant" ReferencedProperty="Plant"/>
+                </NavigationProperty>
+                <Property Name="Plant_Plant" Type="Edm.String" MaxLength="4"/>
+                <NavigationProperty Name="WarehouseNumber" Type="LoadingService.Warehouses">
+                    <ReferentialConstraint Property="WarehouseNumber_WarehouseNumber" ReferencedProperty="WarehouseNumber"/>
+                </NavigationProperty>
+                <Property Name="WarehouseNumber_WarehouseNumber" Type="Edm.String" MaxLength="3"/>
+                <Property Name="InOutPick" Type="Edm.String" MaxLength="1"/>
+                <NavigationProperty Name="Material" Type="LoadingService.Materials">
+                    <ReferentialConstraint Property="Material_Material" ReferencedProperty="Material"/>
+                </NavigationProperty>
+                <Property Name="Material_Material" Type="Edm.String" MaxLength="50"/>
+                <Property Name="ReplenQuantity" Type="Edm.Decimal" Precision="13" Scale="3"/>
+                <Property Name="DestinationBin" Type="Edm.String" MaxLength="10"/>
+                <Property Name="AvailableStock" Type="Edm.Decimal" Precision="13" Scale="3"/>
+                <Property Name="DestinationStorageType" Type="Edm.String" MaxLength="3"/>
+                <Property Name="Status_ID" Type="Edm.String" MaxLength="50"/>
+                <Property Name="Temperature_ID" Type="Edm.String" MaxLength="12"/>
+                <Property Name="Priority" Type="Edm.Int16"/>
+                <Property Name="IsShort" Type="Edm.Boolean"/>
+            </EntityType>
+            <EntityType Name="PickTaskStatuses">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" MaxLength="20" Nullable="false"/>
+                <Property Name="Description" Type="Edm.String" MaxLength="100"/>
+                <NavigationProperty Name="texts" Type="Collection(LoadingService.PickTaskStatuses_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="LoadingService.PickTaskStatuses_texts">
+                    <ReferentialConstraint Property="ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="PickTypes">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" MaxLength="15" Nullable="false"/>
+                <Property Name="Description" Type="Edm.String" MaxLength="100"/>
+                <NavigationProperty Name="texts" Type="Collection(LoadingService.PickTypes_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="LoadingService.PickTypes_texts">
+                    <ReferentialConstraint Property="ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="Media">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="Description" Type="Edm.String" MaxLength="30"/>
+                <NavigationProperty Name="texts" Type="Collection(LoadingService.Media_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="LoadingService.Media_texts">
+                    <ReferentialConstraint Property="ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="MediaTypes">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <NavigationProperty Name="Media" Type="LoadingService.Media">
+                    <ReferentialConstraint Property="Media_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="Media_ID" Type="Edm.String" MaxLength="10"/>
+                <Property Name="NoOfPosition" Type="Edm.Int16"/>
+                <Property Name="PositionCubicCapacity" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <Property Name="CapacityUtilisation" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <Property Name="SingleItemMaxWeight" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <Property Name="MaximumWeightCage" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <Property Name="MaximumWeightMono" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <Property Name="MaximumWeightMulti" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <Property Name="MonoCubeMin" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <Property Name="MonoCubeMax" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <Property Name="MonoCubeThreshold" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <Property Name="MultiCubeMin" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <Property Name="MultiCubeMax" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <Property Name="MultiCubeThreshold" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <Property Name="CustomerPerPositionSweep" Type="Edm.Int16"/>
+                <Property Name="CustomerPerPositionPick" Type="Edm.Int16"/>
+                <Property Name="SheetingNoOfCustomers" Type="Edm.Int16"/>
+                <Property Name="MaximumCubeBtwSheets" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <Property Name="MaximumCustomerPerPallet" Type="Edm.Int16"/>
+                <Property Name="NoOfLastDropForMT" Type="Edm.Int16"/>
+            </EntityType>
+            <EntityType Name="StorageLocationMerging">
+                <Key>
+                    <PropertyRef Name="Temperature"/>
+                    <PropertyRef Name="Plant"/>
+                    <PropertyRef Name="Sloc"/>
+                </Key>
+                <Property Name="Temperature" Type="Edm.String" MaxLength="12" Nullable="false"/>
+                <Property Name="Plant" Type="Edm.String" MaxLength="8" Nullable="false"/>
+                <Property Name="Sloc" Type="Edm.String" MaxLength="8" Nullable="false"/>
+                <NavigationProperty Name="WarehouseNumber" Type="LoadingService.Warehouses">
+                    <ReferentialConstraint Property="WarehouseNumber_WarehouseNumber" ReferencedProperty="WarehouseNumber"/>
+                </NavigationProperty>
+                <Property Name="WarehouseNumber_WarehouseNumber" Type="Edm.String" MaxLength="3"/>
+                <Property Name="WeightToleranceWarning" Type="Edm.Int32"/>
+                <Property Name="WeightToleranceError" Type="Edm.Int32"/>
+            </EntityType>
+            <EntityType Name="MHETypes">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="Description" Type="Edm.String" MaxLength="40"/>
+                <Property Name="HandlingCapacity" Type="Edm.Int32"/>
+                <NavigationProperty Name="texts" Type="Collection(LoadingService.MHETypes_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="LoadingService.MHETypes_texts">
+                    <ReferentialConstraint Property="ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="MHEAssignments">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="Plant" Type="Edm.String" MaxLength="4"/>
+                <Property Name="Temperature" Type="Edm.String" MaxLength="12"/>
+                <NavigationProperty Name="MheType" Type="LoadingService.MHETypes">
+                    <ReferentialConstraint Property="MheType_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="MheType_ID" Type="Edm.String" MaxLength="10"/>
+            </EntityType>
+            <EntityType Name="PickTaskHeaders">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="ID" Type="Edm.String" MaxLength="20" Nullable="false"/>
+                <NavigationProperty Name="PickType" Type="LoadingService.PickTypes">
+                    <ReferentialConstraint Property="PickType_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="PickType_ID" Type="Edm.String" MaxLength="15"/>
+                <NavigationProperty Name="MediaType" Type="LoadingService.MediaTypes">
+                    <ReferentialConstraint Property="MediaType_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="MediaType_ID" Type="Edm.Guid"/>
+                <NavigationProperty Name="Media" Type="LoadingService.Media">
+                    <ReferentialConstraint Property="Media_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="Media_ID" Type="Edm.String" MaxLength="10"/>
+                <Property Name="CageID" Type="Edm.String" MaxLength="20"/>
+                <Property Name="PalletID" Type="Edm.String" MaxLength="20"/>
+                <NavigationProperty Name="Plant" Type="LoadingService.Plants">
+                    <ReferentialConstraint Property="Plant_Plant" ReferencedProperty="Plant"/>
+                </NavigationProperty>
+                <Property Name="Plant_Plant" Type="Edm.String" MaxLength="4"/>
+                <Property Name="Route" Type="Edm.String" MaxLength="10"/>
+                <Property Name="TotalCube" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <NavigationProperty Name="Status" Type="LoadingService.PickTaskStatuses">
+                    <ReferentialConstraint Property="Status_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="Status_ID" Type="Edm.String" MaxLength="20"/>
+                <Property Name="MediaPlacement" Type="Edm.Int16" DefaultValue="1"/>
+                <Property Name="DeliveryDate" Type="Edm.Date"/>
+                <NavigationProperty Name="MHEType" Type="LoadingService.MHEAssignments">
+                    <ReferentialConstraint Property="MHEType_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="MHEType_ID" Type="Edm.Guid"/>
+                <Property Name="PickerUserID" Type="Edm.String" MaxLength="250"/>
+                <Property Name="NominalWeight" Type="Edm.Decimal" Precision="20" Scale="3"/>
+                <Property Name="PickJob" Type="Edm.String" MaxLength="36"/>
+                <Property Name="NoOfPackingBoxRequired" Type="Edm.Int16" DefaultValue="0"/>
+                <Property Name="Temperature_ID" Type="Edm.String" MaxLength="12"/>
+                <Property Name="Sequence" Type="Edm.Int32"/>
+                <Property Name="IsShort" Type="Edm.Boolean" DefaultValue="false"/>
+                <Property Name="IsPalletisedPallet" Type="Edm.Boolean" DefaultValue="false"/>
+                <NavigationProperty Name="To_PickTaskItems" Type="Collection(LoadingService.PickTaskItems)" Partner="Task">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="To_Marshalling" Type="LoadingService.Marshalling" Partner="Task">
+                    <OnDelete Action="Cascade"/>
+                    <ReferentialConstraint Property="ID" ReferencedProperty="Task_ID"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="PickTaskItems">
+                <Key>
+                    <PropertyRef Name="Task_ID"/>
+                    <PropertyRef Name="ItemID"/>
+                </Key>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <NavigationProperty Name="Task" Type="LoadingService.PickTaskHeaders" Partner="To_PickTaskItems">
+                    <ReferentialConstraint Property="Task_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="Task_ID" Type="Edm.String" MaxLength="20" Nullable="false"/>
+                <Property Name="ItemID" Type="Edm.Guid" Nullable="false"/>
+                <NavigationProperty Name="Material" Type="LoadingService.Materials">
+                    <ReferentialConstraint Property="Material_Material" ReferencedProperty="Material"/>
+                </NavigationProperty>
+                <Property Name="Material_Material" Type="Edm.String" MaxLength="50"/>
+                <Property Name="TotalQuantity" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <Property Name="OpenQuantity" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <NavigationProperty Name="Uom" Type="LoadingService.Units">
+                    <ReferentialConstraint Property="Uom_UnitCode" ReferencedProperty="UnitCode"/>
+                </NavigationProperty>
+                <Property Name="Uom_UnitCode" Type="Edm.String" MaxLength="3"/>
+                <Property Name="PositionInCage" Type="Edm.Int32"/>
+                <Property Name="ShipTo" Type="Edm.String" MaxLength="15"/>
+                <Property Name="Cube" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <NavigationProperty Name="Status" Type="LoadingService.PickTaskStatuses">
+                    <ReferentialConstraint Property="Status_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="Status_ID" Type="Edm.String" MaxLength="20"/>
+                <Property Name="Drop" Type="Edm.Int32"/>
+                <Property Name="PickStickLabelID" Type="Edm.String" MaxLength="30"/>
+                <NavigationProperty Name="OriginalPickTask" Type="LoadingService.PickTaskItems">
+                    <ReferentialConstraint Property="OriginalPickTask_Task_ID" ReferencedProperty="Task_ID"/>
+                    <ReferentialConstraint Property="OriginalPickTask_ItemID" ReferencedProperty="ItemID"/>
+                </NavigationProperty>
+                <Property Name="OriginalPickTask_Task_ID" Type="Edm.String" MaxLength="20"/>
+                <Property Name="OriginalPickTask_ItemID" Type="Edm.Guid"/>
+                <Property Name="FinalPalletID" Type="Edm.String" MaxLength="20"/>
+                <Property Name="Batch" Type="Edm.String" MaxLength="10"/>
+                <Property Name="SLoc" Type="Edm.String" MaxLength="4"/>
+                <NavigationProperty Name="Warehouse" Type="LoadingService.Warehouses">
+                    <ReferentialConstraint Property="Warehouse_WarehouseNumber" ReferencedProperty="WarehouseNumber"/>
+                </NavigationProperty>
+                <Property Name="Warehouse_WarehouseNumber" Type="Edm.String" MaxLength="3"/>
+                <Property Name="SourceStorageBin" Type="Edm.String" MaxLength="10"/>
+                <Property Name="SourceStorageType" Type="Edm.String" MaxLength="3"/>
+                <Property Name="NominalWeight" Type="Edm.Decimal" Precision="20" Scale="3"/>
+                <Property Name="ActualWeight" Type="Edm.Decimal" Precision="20" Scale="3"/>
+                <Property Name="ReplenID" Type="Edm.Guid"/>
+                <Property Name="IsReplenCompleted" Type="Edm.Boolean"/>
+                <Property Name="PalletisedQuantity" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <Property Name="PickSequence" Type="Edm.Int32"/>
+                <Property Name="PackingBoxRequired" Type="Edm.Boolean"/>
+                <NavigationProperty Name="ShortReasonCode" Type="LoadingService.ShortReasonCodes">
+                    <ReferentialConstraint Property="ShortReasonCode_Code" ReferencedProperty="Code"/>
+                </NavigationProperty>
+                <Property Name="ShortReasonCode_Code" Type="Edm.String" MaxLength="5"/>
+                <Property Name="NumeratorForCase" Type="Edm.Decimal" Precision="5" Scale="0"/>
+                <Property Name="DenominatorForCase" Type="Edm.Decimal" Precision="5" Scale="0"/>
+                <Property Name="IsShort" Type="Edm.Boolean" DefaultValue="false"/>
+                <Property Name="NoOfPackingBoxRequired" Type="Edm.Int16" DefaultValue="0"/>
+                <Property Name="SweepPickRoute" Type="Edm.String" MaxLength="10"/>
+                <Property Name="IsSweepPickCreated" Type="Edm.Boolean" DefaultValue="false"/>
+                <Property Name="IsSweepPickShorted" Type="Edm.Boolean" DefaultValue="false"/>
+                <Property Name="SweepPickShortedQty" Type="Edm.Decimal" Precision="15" Scale="3" DefaultValue="0"/>
+                <Property Name="IsMovedToPallet" Type="Edm.Boolean" DefaultValue="false"/>
+                <NavigationProperty Name="To_PickTaskDeliveries" Type="Collection(LoadingService.PickTaskDeliveries)" Partner="PickTask">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="To_Palletisations" Type="Collection(LoadingService.PalletisationItems)" Partner="Task">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="PickTaskDeliveries">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <NavigationProperty Name="PickTask" Type="LoadingService.PickTaskItems" Partner="To_PickTaskDeliveries">
+                    <ReferentialConstraint Property="PickTask_Task_ID" ReferencedProperty="Task_ID"/>
+                    <ReferentialConstraint Property="PickTask_ItemID" ReferencedProperty="ItemID"/>
+                </NavigationProperty>
+                <Property Name="PickTask_Task_ID" Type="Edm.String" MaxLength="20"/>
+                <Property Name="PickTask_ItemID" Type="Edm.Guid"/>
+                <NavigationProperty Name="DeliveryItems" Type="LoadingService.DeliveryItems">
+                    <ReferentialConstraint Property="DeliveryItems_Delivery_Delivery" ReferencedProperty="Delivery_Delivery"/>
+                    <ReferentialConstraint Property="DeliveryItems_Item" ReferencedProperty="Item"/>
+                </NavigationProperty>
+                <Property Name="DeliveryItems_Delivery_Delivery" Type="Edm.String" MaxLength="10"/>
+                <Property Name="DeliveryItems_Item" Type="Edm.String" MaxLength="6"/>
+                <Property Name="TotalQuantity" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <Property Name="OpenQuantity" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <NavigationProperty Name="To_PickTaskTONumbers" Type="Collection(LoadingService.PickTaskTONumbers)" Partner="PickTaskDelivery">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="PlantRoutes">
+                <Key>
+                    <PropertyRef Name="Plant"/>
+                    <PropertyRef Name="Route"/>
+                </Key>
+                <Property Name="Plant" Type="Edm.String" MaxLength="4" Nullable="false"/>
+                <Property Name="Route" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="Priority" Type="Edm.Int32"/>
+                <Property Name="PlannedDepatureTime" Type="Edm.TimeOfDay"/>
+                <Property Name="Shuttle" Type="Edm.Boolean" DefaultValue="false"/>
+                <Property Name="ConsolidatedRoute" Type="Edm.String" MaxLength="20"/>
+            </EntityType>
+            <EntityType Name="MediaDeterminations">
+                <Key>
+                    <PropertyRef Name="Plant"/>
+                    <PropertyRef Name="Temperature"/>
+                    <PropertyRef Name="PickType_ID"/>
+                    <PropertyRef Name="Route"/>
+                    <PropertyRef Name="OutputMediaType_ID"/>
+                </Key>
+                <Property Name="Plant" Type="Edm.String" MaxLength="4" Nullable="false"/>
+                <Property Name="Temperature" Type="Edm.String" MaxLength="12" Nullable="false"/>
+                <NavigationProperty Name="PickType" Type="LoadingService.PickTypes">
+                    <ReferentialConstraint Property="PickType_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="PickType_ID" Type="Edm.String" MaxLength="15" Nullable="false"/>
+                <Property Name="Route" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <NavigationProperty Name="OutputMediaType" Type="LoadingService.MediaTypes">
+                    <ReferentialConstraint Property="OutputMediaType_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="OutputMediaType_ID" Type="Edm.Guid" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="RouteVehicleMappings">
+                <Key>
+                    <PropertyRef Name="Route"/>
+                    <PropertyRef Name="Plant"/>
+                    <PropertyRef Name="VehicleID"/>
+                </Key>
+                <Property Name="Route" Type="Edm.String" MaxLength="20" Nullable="false"/>
+                <Property Name="Plant" Type="Edm.String" MaxLength="4" Nullable="false"/>
+                <Property Name="VehicleID" Type="Edm.String" MaxLength="15" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="RemovalStrategyHeaders">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="Plant" Type="Edm.String" MaxLength="4"/>
+                <Property Name="SLoc" Type="Edm.String" MaxLength="4"/>
+                <NavigationProperty Name="Warehouse" Type="LoadingService.Warehouses">
+                    <ReferentialConstraint Property="Warehouse_WarehouseNumber" ReferencedProperty="WarehouseNumber"/>
+                </NavigationProperty>
+                <Property Name="Warehouse_WarehouseNumber" Type="Edm.String" MaxLength="3"/>
+                <NavigationProperty Name="PickType" Type="LoadingService.PickTypes">
+                    <ReferentialConstraint Property="PickType_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="PickType_ID" Type="Edm.String" MaxLength="15"/>
+            </EntityType>
+            <EntityType Name="RemovalStrategyItems">
+                <Key>
+                    <PropertyRef Name="Sequence"/>
+                    <PropertyRef Name="Strategy_ID"/>
+                </Key>
+                <Property Name="Sequence" Type="Edm.Int32" Nullable="false"/>
+                <NavigationProperty Name="Strategy" Type="LoadingService.RemovalStrategyHeaders">
+                    <ReferentialConstraint Property="Strategy_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="Strategy_ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="StorageType" Type="Edm.String" MaxLength="3"/>
+            </EntityType>
+            <EntityType Name="PickWalkSequence">
+                <Key>
+                    <PropertyRef Name="WarehouseNumber_WarehouseNumber"/>
+                    <PropertyRef Name="StorageType"/>
+                    <PropertyRef Name="StorageBin"/>
+                </Key>
+                <NavigationProperty Name="WarehouseNumber" Type="LoadingService.Warehouses">
+                    <ReferentialConstraint Property="WarehouseNumber_WarehouseNumber" ReferencedProperty="WarehouseNumber"/>
+                </NavigationProperty>
+                <Property Name="WarehouseNumber_WarehouseNumber" Type="Edm.String" MaxLength="3" Nullable="false"/>
+                <Property Name="StorageType" Type="Edm.String" MaxLength="3" Nullable="false"/>
+                <Property Name="StorageBin" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="Sequence" Type="Edm.Int32"/>
+            </EntityType>
+            <EntityType Name="PackingBox">
+                <Key>
+                    <PropertyRef Name="PackBoxType"/>
+                </Key>
+                <Property Name="PackBoxType" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="CubicCapacity" Type="Edm.Decimal" Precision="15" Scale="3"/>
+            </EntityType>
+            <EntityType Name="ShortReasonCodes">
+                <Key>
+                    <PropertyRef Name="Code"/>
+                </Key>
+                <Property Name="Code" Type="Edm.String" MaxLength="5" Nullable="false"/>
+                <Property Name="Description" Type="Edm.String" MaxLength="40"/>
+                <NavigationProperty Name="texts" Type="Collection(LoadingService.ShortReasonCodes_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="LoadingService.ShortReasonCodes_texts">
+                    <ReferentialConstraint Property="Code" ReferencedProperty="Code"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="MarshallingBins">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="Area_ID"/>
+                    <PropertyRef Name="Area_Group_ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <NavigationProperty Name="Area" Type="LoadingService.Areas" Partner="To_MarshallingBins">
+                    <ReferentialConstraint Property="Area_ID" ReferencedProperty="ID"/>
+                    <ReferentialConstraint Property="Area_Group_ID" ReferencedProperty="Group_ID"/>
+                </NavigationProperty>
+                <Property Name="Area_ID" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="Area_Group_ID" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="Description" Type="Edm.String" MaxLength="50"/>
+                <Property Name="Capacity" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <Property Name="CapacityUsed" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <Property Name="CapacityAvailable" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <Property Name="Plant" Type="Edm.String" MaxLength="4"/>
+                <Property Name="Temperature" Type="Edm.String" MaxLength="12"/>
+                <NavigationProperty Name="Status" Type="LoadingService.MarshallingBinStatuses">
+                    <ReferentialConstraint Property="Status_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="Status_ID" Type="Edm.String" MaxLength="10"/>
+                <Property Name="IsBlocked" Type="Edm.Boolean"/>
+                <Property Name="CanOpenClose" Type="Edm.Boolean"/>
+                <NavigationProperty Name="texts" Type="Collection(LoadingService.MarshallingBins_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="LoadingService.MarshallingBins_texts">
+                    <ReferentialConstraint Property="ID" ReferencedProperty="ID"/>
+                    <ReferentialConstraint Property="Area_ID" ReferencedProperty="Area_ID"/>
+                    <ReferentialConstraint Property="Area_Group_ID" ReferencedProperty="Area_Group_ID"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="MarshallingBinStatuses">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="Description" Type="Edm.String" MaxLength="50"/>
+                <NavigationProperty Name="texts" Type="Collection(LoadingService.MarshallingBinStatuses_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="LoadingService.MarshallingBinStatuses_texts">
+                    <ReferentialConstraint Property="ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="MarshallingRules">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="Plant" Type="Edm.String" MaxLength="4"/>
+                <Property Name="Temperature" Type="Edm.String" MaxLength="12"/>
+                <NavigationProperty Name="Media" Type="LoadingService.Media">
+                    <ReferentialConstraint Property="Media_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="Media_ID" Type="Edm.String" MaxLength="10"/>
+                <NavigationProperty Name="PickStatus" Type="LoadingService.PickTaskStatuses">
+                    <ReferentialConstraint Property="PickStatus_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="PickStatus_ID" Type="Edm.String" MaxLength="20"/>
+                <Property Name="ConsolidatedRoute" Type="Edm.String" MaxLength="20"/>
+                <Property Name="IsWrapped" Type="Edm.Boolean"/>
+                <NavigationProperty Name="CurrentMarshallingAreaID" Type="LoadingService.Areas">
+                    <ReferentialConstraint Property="CurrentMarshallingAreaID_ID" ReferencedProperty="ID"/>
+                    <ReferentialConstraint Property="CurrentMarshallingAreaID_Group_ID" ReferencedProperty="Group_ID"/>
+                </NavigationProperty>
+                <Property Name="CurrentMarshallingAreaID_ID" Type="Edm.String" MaxLength="10"/>
+                <Property Name="CurrentMarshallingAreaID_Group_ID" Type="Edm.String" MaxLength="10"/>
+                <NavigationProperty Name="DestinationMarshallingAreaID" Type="LoadingService.Areas">
+                    <ReferentialConstraint Property="DestinationMarshallingAreaID_ID" ReferencedProperty="ID"/>
+                    <ReferentialConstraint Property="DestinationMarshallingAreaID_Group_ID" ReferencedProperty="Group_ID"/>
+                </NavigationProperty>
+                <Property Name="DestinationMarshallingAreaID_ID" Type="Edm.String" MaxLength="10"/>
+                <Property Name="DestinationMarshallingAreaID_Group_ID" Type="Edm.String" MaxLength="10"/>
+                <NavigationProperty Name="DestinationMarshallingBin" Type="LoadingService.MarshallingBins">
+                    <ReferentialConstraint Property="DestinationMarshallingBin_ID" ReferencedProperty="ID"/>
+                    <ReferentialConstraint Property="DestinationMarshallingBin_Area_ID" ReferencedProperty="Area_ID"/>
+                    <ReferentialConstraint Property="DestinationMarshallingBin_Area_Group_ID" ReferencedProperty="Area_Group_ID"/>
+                </NavigationProperty>
+                <Property Name="DestinationMarshallingBin_ID" Type="Edm.String" MaxLength="10"/>
+                <Property Name="DestinationMarshallingBin_Area_ID" Type="Edm.String" MaxLength="10"/>
+                <Property Name="DestinationMarshallingBin_Area_Group_ID" Type="Edm.String" MaxLength="10"/>
+                <NavigationProperty Name="DestinationMarshallingStatus" Type="LoadingService.MarshallingStatuses">
+                    <ReferentialConstraint Property="DestinationMarshallingStatus_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="DestinationMarshallingStatus_ID" Type="Edm.String" MaxLength="20"/>
+            </EntityType>
+            <EntityType Name="Marshalling">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <NavigationProperty Name="Task" Type="LoadingService.PickTaskHeaders" Partner="To_Marshalling">
+                    <ReferentialConstraint Property="Task_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="Task_ID" Type="Edm.String" MaxLength="20"/>
+                <Property Name="CageID" Type="Edm.String" MaxLength="20"/>
+                <Property Name="PalletID" Type="Edm.String" MaxLength="20"/>
+                <NavigationProperty Name="Status" Type="LoadingService.MarshallingStatuses">
+                    <ReferentialConstraint Property="Status_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="Status_ID" Type="Edm.String" MaxLength="20"/>
+                <Property Name="Route" Type="Edm.String" MaxLength="10"/>
+                <Property Name="LastDrop" Type="Edm.Int32"/>
+                <Property Name="VehicleID" Type="Edm.String" MaxLength="15"/>
+                <Property Name="Plant" Type="Edm.String" MaxLength="4"/>
+                <Property Name="Temperature_ID" Type="Edm.String" MaxLength="12"/>
+                <NavigationProperty Name="MarshallingBinID" Type="LoadingService.MarshallingBins">
+                    <ReferentialConstraint Property="MarshallingBinID_ID" ReferencedProperty="ID"/>
+                    <ReferentialConstraint Property="MarshallingBinID_Area_ID" ReferencedProperty="Area_ID"/>
+                    <ReferentialConstraint Property="MarshallingBinID_Area_Group_ID" ReferencedProperty="Area_Group_ID"/>
+                </NavigationProperty>
+                <Property Name="MarshallingBinID_ID" Type="Edm.String" MaxLength="10"/>
+                <Property Name="MarshallingBinID_Area_ID" Type="Edm.String" MaxLength="10"/>
+                <Property Name="MarshallingBinID_Area_Group_ID" Type="Edm.String" MaxLength="10"/>
+                <NavigationProperty Name="SuggestedBinID" Type="LoadingService.MarshallingBins">
+                    <ReferentialConstraint Property="SuggestedBinID_ID" ReferencedProperty="ID"/>
+                    <ReferentialConstraint Property="SuggestedBinID_Area_ID" ReferencedProperty="Area_ID"/>
+                    <ReferentialConstraint Property="SuggestedBinID_Area_Group_ID" ReferencedProperty="Area_Group_ID"/>
+                </NavigationProperty>
+                <Property Name="SuggestedBinID_ID" Type="Edm.String" MaxLength="10"/>
+                <Property Name="SuggestedBinID_Area_ID" Type="Edm.String" MaxLength="10"/>
+                <Property Name="SuggestedBinID_Area_Group_ID" Type="Edm.String" MaxLength="10"/>
+                <Property Name="IsWrapped" Type="Edm.Boolean"/>
+                <Property Name="Shuttle" Type="Edm.Boolean" DefaultValue="false"/>
+            </EntityType>
+            <EntityType Name="MarshallingStatuses">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" MaxLength="20" Nullable="false"/>
+                <Property Name="Description" Type="Edm.String" MaxLength="40"/>
+                <NavigationProperty Name="texts" Type="Collection(LoadingService.MarshallingStatuses_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="LoadingService.MarshallingStatuses_texts">
+                    <ReferentialConstraint Property="ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="Areas">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="Group_ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <NavigationProperty Name="Group" Type="LoadingService.Groups" Partner="To_Areas">
+                    <ReferentialConstraint Property="Group_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="Group_ID" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="Description" Type="Edm.String" MaxLength="50"/>
+                <NavigationProperty Name="To_MarshallingBins" Type="Collection(LoadingService.MarshallingBins)" Partner="Area"/>
+                <NavigationProperty Name="texts" Type="Collection(LoadingService.Areas_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="LoadingService.Areas_texts">
+                    <ReferentialConstraint Property="ID" ReferencedProperty="ID"/>
+                    <ReferentialConstraint Property="Group_ID" ReferencedProperty="Group_ID"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="Groups">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="Description" Type="Edm.String" MaxLength="50"/>
+                <NavigationProperty Name="To_Areas" Type="Collection(LoadingService.Areas)" Partner="Group"/>
+                <NavigationProperty Name="texts" Type="Collection(LoadingService.Groups_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="LoadingService.Groups_texts">
+                    <ReferentialConstraint Property="ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="Plants">
+                <Key>
+                    <PropertyRef Name="Plant"/>
+                </Key>
+                <Property Name="Plant" Type="Edm.String" MaxLength="4" Nullable="false"/>
+                <Property Name="Description" Type="Edm.String" MaxLength="100"/>
+                <Property Name="InOutPick" Type="Edm.String" MaxLength="1"/>
+                <Property Name="DeliveryDate" Type="Edm.Date"/>
+                <NavigationProperty Name="texts" Type="Collection(LoadingService.Plants_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="LoadingService.Plants_texts">
+                    <ReferentialConstraint Property="Plant" ReferencedProperty="Plant"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="ReplenRuleHeader">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <NavigationProperty Name="Warehouse" Type="LoadingService.Warehouses">
+                    <ReferentialConstraint Property="Warehouse_WarehouseNumber" ReferencedProperty="WarehouseNumber"/>
+                </NavigationProperty>
+                <Property Name="Warehouse_WarehouseNumber" Type="Edm.String" MaxLength="3"/>
+                <Property Name="StorageType" Type="Edm.String" MaxLength="3"/>
+                <Property Name="Priority" Type="Edm.Int32"/>
+                <Property Name="InOutPick" Type="Edm.String" MaxLength="1"/>
+                <Property Name="ReplenSourceSTYPE" Type="Edm.String" MaxLength="3"/>
+            </EntityType>
+            <EntityType Name="PalletisationItems">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="palletisation_ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="palletisation_ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="PositionInCage" Type="Edm.Int32"/>
+                <NavigationProperty Name="Material" Type="LoadingService.Materials">
+                    <ReferentialConstraint Property="Material_Material" ReferencedProperty="Material"/>
+                </NavigationProperty>
+                <Property Name="Material_Material" Type="Edm.String" MaxLength="50"/>
+                <Property Name="LabelID" Type="Edm.String" MaxLength="50"/>
+                <Property Name="Quantity" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <NavigationProperty Name="Uom" Type="LoadingService.Units">
+                    <ReferentialConstraint Property="Uom_UnitCode" ReferencedProperty="UnitCode"/>
+                </NavigationProperty>
+                <Property Name="Uom_UnitCode" Type="Edm.String" MaxLength="3"/>
+                <Property Name="Status_ID" Type="Edm.String" MaxLength="20"/>
+                <Property Name="Drop" Type="Edm.Int32"/>
+                <Property Name="Cube" Type="Edm.Decimal" Precision="15" Scale="3"/>
+                <Property Name="CageID" Type="Edm.String" MaxLength="20"/>
+                <NavigationProperty Name="Task" Type="LoadingService.PickTaskItems" Partner="To_Palletisations">
+                    <ReferentialConstraint Property="Task_Task_ID" ReferencedProperty="Task_ID"/>
+                    <ReferentialConstraint Property="Task_ItemID" ReferencedProperty="ItemID"/>
+                </NavigationProperty>
+                <Property Name="Task_Task_ID" Type="Edm.String" MaxLength="20"/>
+                <Property Name="Task_ItemID" Type="Edm.Guid"/>
+                <Property Name="OpenQuantity" Type="Edm.Decimal" Precision="15" Scale="3"/>
+            </EntityType>
+            <EntityType Name="PickTaskTONumbers">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <NavigationProperty Name="PickTaskDelivery" Type="LoadingService.PickTaskDeliveries" Partner="To_PickTaskTONumbers">
+                    <ReferentialConstraint Property="PickTaskDelivery_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="PickTaskDelivery_ID" Type="Edm.Guid"/>
+                <Property Name="TONumber" Type="Edm.String" MaxLength="15"/>
+            </EntityType>
+            <EntityType Name="Materials_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="Material"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="Material" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="MaterialDescription" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="Units_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="UnitCode"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="UnitCode" Type="Edm.String" MaxLength="3" Nullable="false"/>
+                <Property Name="MeasUnitText" Type="Edm.String"/>
+                <Property Name="UnitText" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="Warehouses_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="WarehouseNumber"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="WarehouseNumber" Type="Edm.String" MaxLength="3" Nullable="false"/>
+                <Property Name="WhseNoDescr" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="PickTaskStatuses_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="ID" Type="Edm.String" MaxLength="20" Nullable="false"/>
+                <Property Name="Description" Type="Edm.String" MaxLength="100"/>
+            </EntityType>
+            <EntityType Name="PickTypes_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="ID" Type="Edm.String" MaxLength="15" Nullable="false"/>
+                <Property Name="Description" Type="Edm.String" MaxLength="100"/>
+            </EntityType>
+            <EntityType Name="Media_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="ID" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="Description" Type="Edm.String" MaxLength="30"/>
+            </EntityType>
+            <EntityType Name="MHETypes_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="ID" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="Description" Type="Edm.String" MaxLength="40"/>
+            </EntityType>
+            <EntityType Name="ShortReasonCodes_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="Code"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="Code" Type="Edm.String" MaxLength="5" Nullable="false"/>
+                <Property Name="Description" Type="Edm.String" MaxLength="40"/>
+            </EntityType>
+            <EntityType Name="MarshallingBins_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="Area_ID"/>
+                    <PropertyRef Name="Area_Group_ID"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="ID" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <NavigationProperty Name="Area" Type="LoadingService.Areas">
+                    <ReferentialConstraint Property="Area_ID" ReferencedProperty="ID"/>
+                    <ReferentialConstraint Property="Area_Group_ID" ReferencedProperty="Group_ID"/>
+                </NavigationProperty>
+                <Property Name="Area_ID" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="Area_Group_ID" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="Description" Type="Edm.String" MaxLength="50"/>
+            </EntityType>
+            <EntityType Name="MarshallingBinStatuses_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="ID" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="Description" Type="Edm.String" MaxLength="50"/>
+            </EntityType>
+            <EntityType Name="MarshallingStatuses_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="ID" Type="Edm.String" MaxLength="20" Nullable="false"/>
+                <Property Name="Description" Type="Edm.String" MaxLength="40"/>
+            </EntityType>
+            <EntityType Name="Areas_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="Group_ID"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="ID" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <NavigationProperty Name="Group" Type="LoadingService.Groups">
+                    <ReferentialConstraint Property="Group_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="Group_ID" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="Description" Type="Edm.String" MaxLength="50"/>
+            </EntityType>
+            <EntityType Name="Groups_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="ID" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="Description" Type="Edm.String" MaxLength="50"/>
+            </EntityType>
+            <EntityType Name="Plants_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="Plant"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="Plant" Type="Edm.String" MaxLength="4" Nullable="false"/>
+                <Property Name="Description" Type="Edm.String" MaxLength="100"/>
+            </EntityType>
+            <ComplexType Name="RouteStatus">
+                <Property Name="DeliveryDate" Type="Edm.Date"/>
+                <Property Name="Plant" Type="Edm.String" MaxLength="4"/>
+                <Property Name="Route" Type="Edm.String" MaxLength="10"/>
+                <Property Name="newStatus" Type="Edm.String" MaxLength="10"/>
+            </ComplexType>
+            <ComplexType Name="PalletsOfRoute">
+                <Property Name="DeliveryDate" Type="Edm.Date"/>
+                <Property Name="Plant" Type="Edm.String" MaxLength="4"/>
+                <Property Name="Route" Type="Edm.String" MaxLength="10"/>
+                <Property Name="newStatus" Type="Edm.String" MaxLength="10"/>
+                <Property Name="PalletID" Type="Edm.String" MaxLength="20"/>
+                <Property Name="VehicleID" Type="Edm.String" MaxLength="15"/>
+            </ComplexType>
+            <ComplexType Name="MarshallingUpdatePayload">
+                <Property Name="ID" Type="Collection(Edm.Guid)" Nullable="true"/>
+                <Property Name="VehicleID" Type="Edm.String" MaxLength="15"/>
+                <Property Name="Status_ID" Type="Edm.String" MaxLength="20"/>
+            </ComplexType>
+            <Function Name="getConsolidatedRoutes" IsBound="false" IsComposable="false">
+                <Parameter Name="checkRouteField" Type="Edm.String" MaxLength="10"/>
+                <Parameter Name="DeliveryDate" Type="Edm.Date"/>
+                <Parameter Name="Plant" Type="Edm.String" MaxLength="4"/>
+                <ReturnType Type="Collection(LoadingService.RouteStatus)" Nullable="true"/>
+            </Function>
+            <Function Name="getPalletsOfRoute" IsBound="false" IsComposable="false">
+                <Parameter Name="checkRouteField" Type="Edm.String" MaxLength="10"/>
+                <Parameter Name="DeliveryDate" Type="Edm.Date"/>
+                <Parameter Name="Plant" Type="Edm.String" MaxLength="4"/>
+                <Parameter Name="Route" Type="Edm.String" MaxLength="10"/>
+                <ReturnType Type="Collection(LoadingService.PalletsOfRoute)" Nullable="true"/>
+            </Function>
+            <Action Name="confirmLoaded" IsBound="false">
+                <Parameter Name="Items" Type="LoadingService.MarshallingUpdatePayload"/>
+                <ReturnType Type="Edm.String"/>
+            </Action>
+            <Function Name="getVehiclesForRoute" IsBound="false" IsComposable="false">
+                <Parameter Name="ConsolidatedRoute" Type="Edm.String" MaxLength="20"/>
+                <Parameter Name="Plant" Type="Edm.String" MaxLength="4"/>
+                <ReturnType Type="Edm.String"/>
+            </Function>
+            <Function Name="getDashaboardListOfVechicle" IsBound="false" IsComposable="false">
+                <Parameter Name="checkRouteField" Type="Edm.String" MaxLength="10"/>
+                <Parameter Name="DeliveryDate" Type="Edm.Date"/>
+                <Parameter Name="Plant" Type="Edm.String" MaxLength="4"/>
+                <ReturnType Type="Edm.String"/>
+            </Function>
+            <Function Name="getPalletsOfRouteVehicle" IsBound="false" IsComposable="false">
+                <Parameter Name="VehicleID" Type="Edm.String" MaxLength="10"/>
+                <Parameter Name="DeliveryDate" Type="Edm.Date"/>
+                <Parameter Name="Plant" Type="Edm.String" MaxLength="4"/>
+                <Parameter Name="Route" Type="Edm.String" MaxLength="10"/>
+                <ReturnType Type="Edm.String"/>
+            </Function>
+            <Annotations Target="LoadingService.ReplenTR/ID">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LoadingService.ReplenTR/createdAt">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Created On"/>
+            </Annotations>
+            <Annotations Target="LoadingService.ReplenTR/createdBy">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Created By"/>
+            </Annotations>
+            <Annotations Target="LoadingService.ReplenTR/modifiedAt">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Changed On"/>
+            </Annotations>
+            <Annotations Target="LoadingService.ReplenTR/modifiedBy">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Changed By"/>
+            </Annotations>
+            <Annotations Target="LoadingService.MediaTypes/ID">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LoadingService.MHEAssignments/ID">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LoadingService.PickTaskHeaders/createdAt">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Created On"/>
+            </Annotations>
+            <Annotations Target="LoadingService.PickTaskHeaders/createdBy">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Created By"/>
+            </Annotations>
+            <Annotations Target="LoadingService.PickTaskHeaders/modifiedAt">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Changed On"/>
+            </Annotations>
+            <Annotations Target="LoadingService.PickTaskHeaders/modifiedBy">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Changed By"/>
+            </Annotations>
+            <Annotations Target="LoadingService.PickTaskItems/createdAt">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Created On"/>
+            </Annotations>
+            <Annotations Target="LoadingService.PickTaskItems/createdBy">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Created By"/>
+            </Annotations>
+            <Annotations Target="LoadingService.PickTaskItems/modifiedAt">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Changed On"/>
+            </Annotations>
+            <Annotations Target="LoadingService.PickTaskItems/modifiedBy">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Changed By"/>
+            </Annotations>
+            <Annotations Target="LoadingService.PickTaskItems/ItemID">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LoadingService.PickTaskDeliveries/ID">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LoadingService.PickTaskDeliveries/createdAt">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Created On"/>
+            </Annotations>
+            <Annotations Target="LoadingService.PickTaskDeliveries/createdBy">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Created By"/>
+            </Annotations>
+            <Annotations Target="LoadingService.PickTaskDeliveries/modifiedAt">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Changed On"/>
+            </Annotations>
+            <Annotations Target="LoadingService.PickTaskDeliveries/modifiedBy">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Changed By"/>
+            </Annotations>
+            <Annotations Target="LoadingService.RemovalStrategyHeaders/ID">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LoadingService.MarshallingRules/ID">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LoadingService.Marshalling/ID">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LoadingService.Marshalling/createdAt">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Created On"/>
+            </Annotations>
+            <Annotations Target="LoadingService.Marshalling/createdBy">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Created By"/>
+            </Annotations>
+            <Annotations Target="LoadingService.Marshalling/modifiedAt">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Changed On"/>
+            </Annotations>
+            <Annotations Target="LoadingService.Marshalling/modifiedBy">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Changed By"/>
+            </Annotations>
+            <Annotations Target="LoadingService.ReplenRuleHeader/ID">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LoadingService.PalletisationItems/ID">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LoadingService.PalletisationItems/createdAt">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Created On"/>
+            </Annotations>
+            <Annotations Target="LoadingService.PalletisationItems/createdBy">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Created By"/>
+            </Annotations>
+            <Annotations Target="LoadingService.PalletisationItems/modifiedAt">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Changed On"/>
+            </Annotations>
+            <Annotations Target="LoadingService.PalletisationItems/modifiedBy">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Changed By"/>
+            </Annotations>
+            <Annotations Target="LoadingService.PickTaskTONumbers/ID">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LoadingService.PickTaskTONumbers/createdAt">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Created On"/>
+            </Annotations>
+            <Annotations Target="LoadingService.PickTaskTONumbers/createdBy">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Created By"/>
+            </Annotations>
+            <Annotations Target="LoadingService.PickTaskTONumbers/modifiedAt">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Changed On"/>
+            </Annotations>
+            <Annotations Target="LoadingService.PickTaskTONumbers/modifiedBy">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Changed By"/>
+            </Annotations>
+            <Annotations Target="LoadingService.Materials_texts/locale">
+                <Annotation Term="Common.Label" String="Language Code"/>
+            </Annotations>
+            <Annotations Target="LoadingService.Units_texts/locale">
+                <Annotation Term="Common.Label" String="Language Code"/>
+            </Annotations>
+            <Annotations Target="LoadingService.Warehouses_texts/locale">
+                <Annotation Term="Common.Label" String="Language Code"/>
+            </Annotations>
+            <Annotations Target="LoadingService.PickTaskStatuses_texts/locale">
+                <Annotation Term="Common.Label" String="Language Code"/>
+            </Annotations>
+            <Annotations Target="LoadingService.PickTypes_texts/locale">
+                <Annotation Term="Common.Label" String="Language Code"/>
+            </Annotations>
+            <Annotations Target="LoadingService.Media_texts/locale">
+                <Annotation Term="Common.Label" String="Language Code"/>
+            </Annotations>
+            <Annotations Target="LoadingService.MHETypes_texts/locale">
+                <Annotation Term="Common.Label" String="Language Code"/>
+            </Annotations>
+            <Annotations Target="LoadingService.ShortReasonCodes_texts/locale">
+                <Annotation Term="Common.Label" String="Language Code"/>
+            </Annotations>
+            <Annotations Target="LoadingService.MarshallingBins_texts/locale">
+                <Annotation Term="Common.Label" String="Language Code"/>
+            </Annotations>
+            <Annotations Target="LoadingService.MarshallingBinStatuses_texts/locale">
+                <Annotation Term="Common.Label" String="Language Code"/>
+            </Annotations>
+            <Annotations Target="LoadingService.MarshallingStatuses_texts/locale">
+                <Annotation Term="Common.Label" String="Language Code"/>
+            </Annotations>
+            <Annotations Target="LoadingService.Areas_texts/locale">
+                <Annotation Term="Common.Label" String="Language Code"/>
+            </Annotations>
+            <Annotations Target="LoadingService.Groups_texts/locale">
+                <Annotation Term="Common.Label" String="Language Code"/>
+            </Annotations>
+            <Annotations Target="LoadingService.Plants_texts/locale">
+                <Annotation Term="Common.Label" String="Language Code"/>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

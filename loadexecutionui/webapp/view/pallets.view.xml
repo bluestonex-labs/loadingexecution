@@ -1,0 +1,55 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:tnt="sap.tnt" xmlns:core="sap.ui.core" controllerName="com.sysco.wm.loadexecutionui.controller.pallets">
+    <Page title="{i18n>title}" showHeader="false" showFooter="false" showSubHeader="false">
+        <HBox width="100%" height="100%" alignContent="Center" alignItems="Center">
+            <VBox width="50%" alignItems="Center" alignContent="Center" class="responsiveBox topPadding sapUiNoMarginEnd" fitContainer="true" height="100%">
+                <HBox id="hbHeader" height="auto">
+                    <Title id="total" text="0" class="sapUiTinyMargin sapUiNoMarginEnd" level="H2" titleStyle="H2"/>
+                    <Label text="{i18n>open}" class="sapUiNoMarginBegin sapUiNoMarginEnd sapUiTinyMargin css1"/>
+
+                    <Title id="frozen" text="0" level="H2" titleStyle="H2" class="sapUiNoMarginEnd sapUiTinyMargin"/>
+                    <core:Icon src="sap-icon://fridge" class="sapUiNoMarginBegin sapUiTinyMargin css1" color="blue">
+                        <core:layoutData>
+                            <FlexItemData growFactor="1"/>
+                        </core:layoutData>
+                    </core:Icon>
+
+                    <Title id="fresh" text="0" level="H2" titleStyle="H2" class="sapUiNoMarginEnd sapUiTinyMargin"/>
+                    <core:Icon src="sap-icon://e-care" class="sapUiNoMarginBegin sapUiTinyMargin css1" color="green">
+                        <core:layoutData>
+                            <FlexItemData growFactor="1"/>
+                        </core:layoutData>
+                    </core:Icon>
+                </HBox>
+
+                <VBox id="vbList" width="100%" alignItems="Center" alignContent="Center" justifyContent="Center" class="">
+                    <List items="{path: '/value'}" id="palletsLst" growingThreshold="4" growingScrollToLoad="true" mode="SingleSelectMaster">
+                        <items>
+                            <CustomListItem>
+                                <VBox>
+                                    <HBox width="100%" alignContent="Center" alignItems="Center" fitContainer="true" justifyContent="Center" class="customMarginPalletList">
+                                        <HBox width="80%" justifyContent="Center" class="roundBoxBlue" alignItems="Center" alignContent="Center" fitContainer="true">
+                                            <Text text="{i18n>palletid} {PALLETID}" class="whiteText sapUiTinyMarginBegin"/>
+                                            <ToolbarSpacer/>
+                                            <ObjectStatus class="sapUiTinyMargin whiteIcon" icon="{FrozenIcon}" state="{FrozenState}"/>
+                                        </HBox>
+                                        <ObjectStatus class="sapUiTinyMargin largeIcon" icon="sap-icon://sys-enter" state="{State}" visible="{Visible}"/>
+                                    </HBox>
+                                </VBox>
+                            </CustomListItem>
+                        </items>
+                    </List>
+                </VBox>
+            </VBox>
+            <VBox width="50%" alignItems="Center" alignContent="Center" justifyContent="Center" class="responsiveBox sapUiTinyMargin sapUiNoMarginBegin" fitContainer="true" height="100%">
+                <Title class="loadVehicleFilters loadVehicleSelected sapUiSmallMarginBottom" text="{i18n>scanText}"/>
+                <Input id="inPalletID" width="12rem" value="" placeholder="{i18n>enterPalletID}" change="onScanPallet">
+				</Input>
+				<!--<Button id="scanAdd" class="loadVehicleFilters loadVehicleSelected sapUiSmallMarginBottom" text="{i18n>scanAPallet}" press="onScanPallet">
+				</Button>-->
+                
+                <Button id="confirmLoad" class="loadVehicleFilters loadVehicleSelected sapUiSmallMarginBottom" text="{i18n>confirmLoad}" press="onConfirmLoaded"/>
+                <Button id="close" class="loadVehicleFilters loadVehicleSelected sapUiSmallMarginBottom" text="{i18n>close}" press="onRouteClose"/>
+            </VBox>
+        </HBox>
+    </Page>
+</mvc:View>

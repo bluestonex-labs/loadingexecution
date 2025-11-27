@@ -1,0 +1,62 @@
+# yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
+
+specVersion: "3.1"
+metadata:
+  name: com.sysco.wm.loadexecutionui
+type: application
+server:
+  customMiddleware:
+    - name: fiori-tools-proxy
+      afterMiddleware: compression
+      configuration:
+        ignoreCertError: false
+        ui5:
+          path:
+            - /resources
+            - /test-resources
+          url: https://ui5.sap.com
+        backend:
+          - url: https://bsx-sysco-sandbox-f20-sandbox-f20-cloudwm-srv.cfapps.eu10-004.hana.ondemand.com/
+            authenticationType: OAuth2UserTokenExchange
+            destination: CloudWM
+            path: /cloudWMService
+            pathReplace: /
+          - url: https://bsx-sysco-sandbox-f20-sandbox-f20-cloudwm-srv.cfapps.eu10-004.hana.ondemand.com/
+            authenticationType: OAuth2UserTokenExchange
+            destination: CloudWM
+            path: /CloudWM
+            pathReplace: /
+          - url: https://bsx-sysco-sandbox-f20-sandbox-f20-cloudwm-srv.cfapps.eu10-004.hana.ondemand.com
+            authenticationType: OAuth2UserTokenExchange
+            destination: CloudWM
+            path: /Loading
+    - name: fiori-tools-appreload
+      afterMiddleware: compression
+      configuration:
+        port: 35729
+        path: webapp
+        delay: 300
+    - name: fiori-tools-preview
+      afterMiddleware: fiori-tools-appreload
+      configuration:
+        flp:
+          theme: sap_horizon
+    - name: sap-fe-mockserver
+      beforeMiddleware: csp
+      configuration:
+        mountPath: /
+        services:
+          - urlPath: /pick
+            metadataPath: ./webapp/localService/mainService/metadata.xml
+            mockdataPath: ./webapp/localService/mainService/data
+            generateMockData: true
+          - urlPath: /CloudWM
+          - urlPath: /cloudWMService/CloudWM
+            metadataPath: ./webapp/localService/CloudWM/metadata.xml
+            mockdataPath: ./webapp/localService/mainService/data
+            generateMockData: true
+          - urlPath: /Loading
+            metadataPath: ./webapp/localService/Loading/metadata.xml
+            mockdataPath: ./webapp/localService/Loading/data
+            generateMockData: true
+        annotations: []
