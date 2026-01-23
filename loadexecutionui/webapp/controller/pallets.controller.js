@@ -70,7 +70,7 @@ sap.ui.define([
                     var freshCount = 0;
                     if (oData.value.length > 0) {
                         that.getView().byId("inPalletID").setEnabled(true);
-                        //that.getView().byId("vbList").setVisible(true);
+                        //that.getView().byId("palletsLst").setVisible(true);
                         for (var i = 0; i < oData.value.length; i++) {
                             if (oData.value[i].Temperature === "Frozen") {
                                 frozenCount = frozenCount + 1;
@@ -91,7 +91,10 @@ sap.ui.define([
                         getPallets.setModel(allPalletsMod);
                     } else {
                         that.getView().byId("inPalletID").setEnabled(false);
-                        //that.getView().byId("vbList").setVisible(false);
+                        var allPalletsDumData = oData;
+                        var allPalletsMod = new JSONModel(allPalletsDumData);
+                        getPallets.setModel(allPalletsMod);
+                        //that.getView().byId("palletsLst").setVisible(false);
                     }
                     that.getView().byId("total").setText(oData.value.length);
                     that.getView().byId("frozen").setText(frozenCount);
