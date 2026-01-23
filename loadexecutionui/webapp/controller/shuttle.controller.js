@@ -58,6 +58,7 @@ sap.ui.define([
                     var allVehIdData = oData.value;
                     var allVedId = new JSONModel(allVehIdData);
                     getVehicleId.setModel(allVedId, "vehIdMod");
+                    that.setVehicleIDList(oData.value);
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     BusyIndicator.hide();
@@ -90,8 +91,34 @@ sap.ui.define([
             //oRouter.navTo("pallets", { vehicleId: sVehicleId });
         },
 
+        /**
+         * 
+         * @param {*} vehiclesArray is a list of vehicles, containing objects made up of: Plant, Route and VehicleID
+         * 
+         * Function that recieves a list of available vehicles, sorts the list and adds the data to the view,
+         * Called whenever the list of vehicles is updated, which is whenever this view is navigated to.
+         */
+        setVehicleIDList: function (vehiclesArray) {
+            var vehiclesModel = new JSONModel();
+            var newVehiclesArray = [];
+            var contains;
+            for (let i = 0; i < vehiclesArray.length; i++) {
+                contains = newVehiclesArray.some(elem => vehiclesArray[i].VEHICLEID === elem.VEHICLEID);
+                if (contains === false) { // If ID not already in the unique list, add it
+                    newVehiclesArray.push({VEHICLEID: vehiclesArray[i].VEHICLEID});
+                }
+            }
+            //newVehiclesArray.push({VehicleID: 'None' }); // Add item to signify no vehicleID selected
+            var collator = new Intl.Collator([], { numeric: true });
+            // Using Collator to compare vehicle IDs in order to sort the data
+            newVehiclesArray.sort((a, b) => collator.compare(a.VEHICLEID, b.VEHICLEID));
+            vehiclesModel.setData(newVehiclesArray);
+            this.getView().setModel(vehiclesModel, "vehicles");
+        },
+
         onVehicleConfirm: function () {
-            var sVehicleId = this.getView().byId("productInput").getValue();
+            //var sVehicleId = this.getView().byId("productInput").getValue(); // From suggestion input box
+            var sVehicleId = this.getView().byId("productSelect").getSelectedKey(); // From Select dropdown
             var plant = this.getOwnerComponent().getModel("configModel").getData().Plant;
             var routeID = this.routeID;
             //MessageBox.show("Please Implement Vehicle update againt RouteID");
