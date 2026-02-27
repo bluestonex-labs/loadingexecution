@@ -199,6 +199,17 @@ sap.ui.define([
                     loadType = "Radial";
                 }
 
+                var payload = {
+                    "Event_Timestamp": null,
+                    "Event_Type": "ROUTE_OPENED",
+                    "ID": "",
+                    "Level": "H",
+                    "PickTask_ID": "",
+                    "User_ID": null,
+                    "Value": oData.Route
+                }
+                this.reportingService(payload);
+
                 oRouter.navTo("shuttle", {
                     routeID: selectedrouteID,
                     load: loadType
@@ -206,6 +217,27 @@ sap.ui.define([
             } else if (oData.newStatus === "CLOSED") {
                 MessageBox.information(this.getView().getModel("i18n").getResourceBundle().getText("routeClosed"));
             }
+
+        },
+
+        reportingService: function (payload) {
+            //BusyIndicator.show(500);
+            var that = this;
+            $.ajax({
+                url: this.appModulePath + "/cloudWMService/CloudWM/LoadingEvents",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(payload),
+                dataType: "json",
+                async: true,
+                success: function (oData, response) {
+                    console.log("Successfully reported loading started")
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    //BusyIndicator.hide();
+                    console.error("Error reporting load vehicle started");
+                }
+            }, this);
 
         }
     });

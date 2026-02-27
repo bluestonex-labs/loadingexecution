@@ -96,7 +96,38 @@ sap.ui.define([
             var routeID = this.routeID;
             //MessageBox.show("Please Implement Vehicle update againt RouteID");
             var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+            var payload = {
+                "Event_Timestamp": null,
+                "Event_Type": "VEHICLEID_ENTERED",
+                "ID": "",
+                "Level": "H",
+                "PickTask_ID": "",
+                "User_ID": null,
+                "Value": sVehicleId
+            }
+            this.reportingService(payload);
             oRouter.navTo("pallets", { checkRouteField: this.loadType, Plant: plant, Route: routeID, vehicle: sVehicleId });
+        },
+
+        reportingService: function (payload) {
+            //BusyIndicator.show(500);
+            var that = this;
+            $.ajax({
+                url: this.appModulePath + "/cloudWMService/CloudWM/LoadingEvents",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(payload),
+                dataType: "json",
+                async: true,
+                success: function (oData, response) {
+                    console.log("Successfully reported loading started")
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    //BusyIndicator.hide();
+                    console.error("Error reporting load vehicle started");
+                }
+            }, this);
+
         }
 
     });

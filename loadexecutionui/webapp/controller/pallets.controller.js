@@ -127,6 +127,16 @@ sap.ui.define([
         },
 
         onClose: function () {
+            var payload = {
+                "Event_Timestamp": null,
+                "Event_Type": "VEHICLE_CLOSED",
+                "ID": "",
+                "Level": "H",
+                "PickTask_ID": "",
+                "User_ID": null,
+                "Value": this.vehicleId
+            }
+            this.reportingService(payload);
             this.getOwnerComponent().getRouter().navTo("loadTypes");
         },
 
@@ -165,6 +175,16 @@ sap.ui.define([
                                 //this.getView().byId("scanAdd").setText(this.getView().getModel("i18n").getResourceBundle().getText("scanAdd"));
                                 this.getView().byId("confirmLoad").setEnabled(true);
                                 this.getView().byId("inPalletID").setValue();
+                                var payload = {
+                                    "Event_Timestamp": null,
+                                    "Event_Type": "PALLET_SCANNED",
+                                    "ID": "",
+                                    "Level": "H",
+                                    "PickTask_ID": items[i].TASK_ID,
+                                    "User_ID": null,
+                                    "Value": null
+                                }
+                                this.reportingService(payload);
                             }
                         }
                     }
@@ -210,6 +230,7 @@ sap.ui.define([
                 }
             };
             var that = this;
+            var reportingPayload;
 
             $.ajax({
                 url: this.appModulePath + "/cloudWMService/Loading/confirmLoaded",
@@ -221,13 +242,49 @@ sap.ui.define([
                 success: function (oData, response) {
                     BusyIndicator.hide();
                     MessageToast.show(idList.length + " " + that.getView().getModel("i18n").getResourceBundle().getText("palletLoaded"));
+                    //that.reportingService(payload);
                     that.getPalletsList();
+                    for (var i = 0; i < items.length; i++) {
+                        if (items[i].State === "Success") {
+                            reportingPayload = {
+                                "Event_Timestamp": null,
+                                "Event_Type": "PALLET_LOADED",
+                                "ID": "",
+                                "Level": "I",
+                                "PickTask_ID": items[i].TASK_ID,
+                                "User_ID": null,
+                                "Value": that.vehicleId
+                            };
+                            that.reportingService(reportingPayload);
+                        }
+                    } 
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     BusyIndicator.hide();
                     MessageBox.error(that.getView().getModel("i18n").getResourceBundle().getText("serviceCallErrorMessage"));
                 }
             }, this);
+        },
+
+        reportingService: function (payload) {
+            //BusyIndicator.show(500);
+            var that = this;
+            $.ajax({
+                url: this.appModulePath + "/cloudWMService/CloudWM/LoadingEvents",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(payload),
+                dataType: "json",
+                async: true,
+                success: function (oData, response) {
+                    console.log("Successfully reported to service")
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    //BusyIndicator.hide();
+                    console.error("Error reporting to service");
+                }
+            }, this);
+
         }
     });
 });
