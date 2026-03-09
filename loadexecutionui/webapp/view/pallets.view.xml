@@ -41,14 +41,14 @@
                 </VBox>
             </VBox>
             <VBox width="50%" alignItems="Center" alignContent="Center" justifyContent="Center" class="responsiveBox sapUiTinyMargin sapUiNoMarginBegin" fitContainer="true" height="100%">
-                <Title class="loadVehicleFilters loadVehicleSelected sapUiSmallMarginBottom" text="{i18n>scanText}"/>
+                <Title class="loadVehicleFilters loadVehicleSelected sapUiTinyMarginTop" text="{i18n>scanText}"/>
                 <Input id="inPalletID" width="12rem" value="" placeholder="{i18n>enterPalletID}" change="onScanPallet">
 				</Input>
 				<!--<Button id="scanAdd" class="loadVehicleFilters loadVehicleSelected sapUiSmallMarginBottom" text="{i18n>scanAPallet}" press="onScanPallet">
 				</Button>-->
                 
-                <Button id="confirmLoad" class="loadVehicleFilters loadVehicleSelected sapUiSmallMarginBottom" text="{i18n>confirmLoad}" press="onConfirmLoaded"/>
-                <Button id="close" class="loadVehicleFilters loadVehicleSelected sapUiSmallMarginBottom" text="{i18n>close}" press="onRouteClose"/>
+                <Button id="confirmLoad" class="loadVehicleFilters loadVehicleSelected sapUiTinyMarginTopBottom tallButton" text="{i18n>confirmLoad}" press="onConfirmLoaded"/>
+                <Button id="close" class="loadVehicleFilters loadVehicleSelected sapUiSmallMarginBottom tallButton" text="{i18n>close}" press="onRouteClose"/>
             </VBox>
         </HBox>
     </Page>

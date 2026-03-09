@@ -133,3 +133,39 @@
 .topPadding {
     padding-top: 88px !important;
 }
+
+.tallButton.sapMBtn{
+    height: 100px !important;
+}
+
+.tallButton .sapMBtnInner {
+    height: 100px !important;
+}
+
+.tallButton .sapMBtnContent {
+    line-height: 100px !important; 
+}
+
+.mediumButton .sapMBtn {
+    height: 65px !important;
+}
+
+.mediumButton .sapMBtnInner {
+    height: 65px !important;
+}
+
+.mediumButton .sapMBtnContent {
+    line-height: 45px !important; 
+}
+
+.ListButtons .boxItem {
+    height: 60px !important;
+}
+
+.ListButtons .sapMBtnInner {
+    height: 45px !important;
+}
+
+.ListButtons .sapMBtnContent {
+    line-height: 45px !important; 
+}

@@ -12,7 +12,7 @@
                         <core:Item text="{vehIdMod>VEHICLEID}"/>
                     </suggestionItems>
                 </Input>
-                <Button text="{i18n>confirm}" press="onVehicleConfirm" class="loadVehicleFilters loadVehicleSelected"/>
+                <Button text="{i18n>confirm}" press="onVehicleConfirm" class="loadVehicleFilters loadVehicleSelected tallButton"/>
             </VBox>
         </HBox>
     </Page>

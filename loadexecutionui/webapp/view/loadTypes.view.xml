@@ -2,15 +2,15 @@
     <Page title="{i18n>title}" showHeader="false">
         <HBox width="100%" height="100%">
             <VBox width="50%" alignItems="Center" alignContent="Center" justifyContent="Center">
-                <Button id="allLoads" class="loadVehicleFilters loadVehicleSelected sapUiSmallMarginBottom" text="{i18n>allLoadBtn}" press=".onAllLoads"/>
-                <Button id="shuttle" class="loadVehicleFilters loadVehicleSelected sapUiSmallMarginBottom" text="{i18n>shuttle}" press=".onShuttle"/>
-                <Button id="radial" class="loadVehicleFilters loadVehicleSelected sapUiSmallMarginBottom" text="{i18n>radial}" press=".onRadial"/>
+                <Button id="allLoads" class="loadVehicleFilters loadVehicleSelected sapUiMediumMarginBottom mediumButton" text="{i18n>allLoadBtn}" press=".onAllLoads"/>
+                <Button id="shuttle" class="loadVehicleFilters loadVehicleSelected sapUiMediumMarginBottom mediumButton" text="{i18n>shuttle}" press=".onShuttle"/>
+                <Button id="radial" class="loadVehicleFilters loadVehicleSelected sapUiSmallMarginBottom mediumButton" text="{i18n>radial}" press=".onRadial"/>
             </VBox>
             <VBox width="50%" height="100%" alignContent="Center" class="responsiveBox" direction="Column" justifyContent="Center" fitContainer="true" renderType="Bare">
                 <ScrollContainer id="scRoutes" width="100%" vertical="true">
                     <VBox width="100%" height="100%" alignContent="Center" alignItems="Center" fitContainer="true" justifyContent="Center">
-                        <List items="{path: '/value'}" id="allLoadLst" class="transparentList loadList sapUiSizeCompact" mode="SingleSelectMaster" itemPress="onListItemPress" growing="true" growingThreshold="5" backgroundDesign="Transparent">
-                            <CustomListItem id="clTemplate" type="Active">
+                        <List items="{path: '/value'}" id="allLoadLst" class="transparentList loadList sapUiSizeCozy" mode="SingleSelectMaster" itemPress="onListItemPress" growing="true" growingThreshold="5" backgroundDesign="Transparent">
+                            <CustomListItem id="clTemplate" type="Active" class="sapUiSmallMarginBottom ListButtons">
                                 <VBox class="boxItem sapUiTinyMarginBottom" width="100%" alignContent="Center" alignItems="Center" fitContainer="true" justifyContent="Center">
                                     <HBox justifyContent="Inherit" class="boxItem sapUiTinyMargin" width="100%" fitContainer="true" alignContent="Center" alignItems="Center" height="100%">
                                         <Text text="{i18n>route} {Route}" class="sapUiTinyMarginBegin"/>

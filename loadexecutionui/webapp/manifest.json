@@ -76,7 +76,7 @@
       }
     },
     "contentDensities": {
-      "compact": true,
+      "compact": false,
       "cozy": true
     },
     "models": {
