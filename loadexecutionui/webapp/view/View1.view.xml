@@ -8,7 +8,7 @@
             <VBox width="50%" alignItems="Center" alignContent="Center" justifyContent="Center" height="100%">
                 <items>
                     <DatePicker id="picker0" placeholder="{i18n>selectDelDate}"/>
-                    <Button id="loadVehicle" class="loadVehicleFilters loadVehicleSelected sapUiSmallMarginBottom tallButton" text="{i18n>loadVeh}" press=".onLoadVehicle" visible="true"/>
+                    <Button id="loadVehicle" class="largeWidth sapUiSmallMarginBottom tallButton blackButton" text="{i18n>loadVeh}" press=".onLoadVehicle" visible="true"/>
                 </items>
             </VBox>
         </HBox>

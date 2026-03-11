@@ -55,11 +55,11 @@ sap.ui.define([
                 dataType: "json",
                 async: true,
                 success: function (oData, response) {
-                    console.log("Successfully reported loading started")
+                    //console.log("Successfully reported loading started");
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     //BusyIndicator.hide();
-                    console.error("Error reporting load vehicle started");
+                    console.error("Error reporting");
                 }
             }, this);
 

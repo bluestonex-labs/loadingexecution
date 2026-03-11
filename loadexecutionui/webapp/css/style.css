@@ -155,7 +155,7 @@
 }
 
 .mediumButton .sapMBtnContent {
-    line-height: 45px !important; 
+    line-height: 65px !important; 
 }
 
 .ListButtons .boxItem {
@@ -168,4 +168,16 @@
 
 .ListButtons .sapMBtnContent {
     line-height: 45px !important; 
+}
+
+.blackButton .sapMBtnInner {
+    color: #ffffff !important;
+    background-color: black !important;
+    background: black !important;
+    border-color: black !important; 
+    
+}
+
+.largeWidth {
+    width: 200px !important;
 }

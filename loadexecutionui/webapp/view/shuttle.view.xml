@@ -2,8 +2,8 @@
     <Page title="{i18n>title}" showHeader="false" showFooter="false">
         <HBox width="100%" height="100%">
             <VBox width="50%" alignItems="Center" alignContent="Center" justifyContent="Center">
-                <Button id="shuttleid" class="loadVehicleFilters loadVehicleSelected sapUiSmallMarginBottom" text="" enabled="false"/>
-                <Button id="routeid" class="loadVehicleFilters loadVehicleSelected sapUiSmallMarginBottom" text="{i18n>route}" enabled="false"/>
+                <Button id="shuttleid" class="largeWidth blackButton sapUiSmallMarginBottom" text="" enabled="false"/>
+                <Button id="routeid" class="largeWidth blackButton sapUiSmallMarginBottom" text="{i18n>route}" enabled="false"/>
             </VBox>
             <VBox width="50%" alignItems="Center" alignContent="Center" justifyContent="Center" class="responsiveBox">
                     <Title text="{i18n>vehicleID}" id="idSuggestionsSearch" width="12rem"/>
@@ -12,7 +12,7 @@
                         <core:Item text="{vehIdMod>VEHICLEID}"/>
                     </suggestionItems>
                 </Input>
-                <Button text="{i18n>confirm}" press="onVehicleConfirm" class="loadVehicleFilters loadVehicleSelected tallButton"/>
+                <Button text="{i18n>confirm}" press="onVehicleConfirm" class="largeWidth blackButton tallButton"/>
             </VBox>
         </HBox>
     </Page>
