@@ -135,15 +135,15 @@
 }
 
 .tallButton.sapMBtn{
-    height: 100px !important;
+    height: 90px !important;
 }
 
 .tallButton .sapMBtnInner {
-    height: 100px !important;
+    height: 90px !important;
 }
 
 .tallButton .sapMBtnContent {
-    line-height: 100px !important; 
+    line-height: 90px !important; 
 }
 
 .mediumButton .sapMBtn {

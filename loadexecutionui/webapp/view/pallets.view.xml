@@ -48,7 +48,7 @@
 				</Button>-->
                 
                 <Button id="confirmLoad" class="loadVehicleFilters loadVehicleSelected sapUiTinyMarginTopBottom tallButton" text="{i18n>confirmLoad}" press="onConfirmLoaded"/>
-                <Button id="close" class="loadVehicleFilters loadVehicleSelected sapUiSmallMarginBottom tallButton" text="{i18n>close}" press="onRouteClose"/>
+                <Button id="close" class="loadVehicleFilters loadVehicleSelected tallButton" text="{i18n>close}" press="onRouteClose"/>
             </VBox>
         </HBox>
     </Page>
