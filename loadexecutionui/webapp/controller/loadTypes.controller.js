@@ -190,7 +190,7 @@ sap.ui.define([
             var oSelectedItem = oEvent.getParameter("listItem");
             var oContext = oSelectedItem.getBindingContext();
             var oData = oContext.getObject();
-            if (oData.newStatus === "OPEN") {
+            if (oData.newStatus.toUpperCase() === "OPEN" || oData.newStatus.toUpperCase() === "OUVERT") {
                 var selectedrouteID = oData.Route
                 var loadType = "";
                 if (oData.Shuttle === 1) {
@@ -214,7 +214,7 @@ sap.ui.define([
                     routeID: selectedrouteID,
                     load: loadType
                 });
-            } else if (oData.newStatus === "CLOSED") {
+            } else if (oData.newStatus.toUpperCase() === "CLOSED" || oData.newStatus.toUpperCase() === "FERMÉE") {
                 MessageBox.information(this.getView().getModel("i18n").getResourceBundle().getText("routeClosed"));
             }
 
