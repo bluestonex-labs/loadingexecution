@@ -21,14 +21,24 @@ sap.ui.define([
 
         onLoadVehicle: function () {
             var selectedDate = this.getView().byId("picker0").getDateValue();
-            if (selectedDate === "" || selectedDate === undefined || selectedDate === null) {
+            var secondDate = this.getView().byId("picker0").getSecondDateValue();
+            if (selectedDate === "" || selectedDate === undefined || selectedDate === null || secondDate === "" || secondDate === undefined || secondDate === null) {
                 MessageBox.information(this.getView().getModel("i18n").getResourceBundle().getText("selectDate"));
             } else {
                 var year = selectedDate.getFullYear();
                 var month = (selectedDate.getMonth() + 1).toString().padStart(2, '0');
                 var day = selectedDate.getDate().toString().padStart(2, '0');
                 var delDate = `${year}-${month}-${day}`;
-                this.loadingParams.DeliveryDate = delDate;
+
+                var endYear = secondDate.getFullYear();
+                var endMonth = (secondDate.getMonth() + 1).toString().padStart(2, '0');
+                var endDay = secondDate.getDate().toString().padStart(2, '0');
+                
+                var startDate = `${year}-${month}-${day}`;
+                var endDate = `${endYear}-${endMonth}-${endDay}`;
+
+                this.loadingParams.startDate = startDate;
+                this.loadingParams.endDate = endDate;
                 this.getOwnerComponent().getModel("configModel").setData(this.loadingParams);
                 var payload = {
                     "Event_Timestamp": null,
