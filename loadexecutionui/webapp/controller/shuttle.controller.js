@@ -23,6 +23,12 @@ sap.ui.define([
             var appPath = appId.replaceAll(".", "/");
             this.appModulePath = jQuery.sap.getModulePath(appPath);
 
+            if (window.matchMedia("(orientation: portrait)").matches) {
+                this.getView().byId("hbShuttle").setDirection("Column");
+            } else {
+                this.getView().byId("hbShuttle").setDirection("Row");
+            }
+
             this.routeID = oEvent.getParameter("arguments").routeID;
             this.loadType = oEvent.getParameter("arguments").load;
 

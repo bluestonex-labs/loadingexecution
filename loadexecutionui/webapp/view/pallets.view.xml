@@ -1,7 +1,7 @@
 <mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:tnt="sap.tnt" xmlns:core="sap.ui.core" controllerName="com.sysco.wm.loadexecutionui.controller.pallets">
     <Page title="{i18n>title}" showHeader="false" showFooter="false" showSubHeader="false" enableScrolling="false">
         <HBox width="100%" height="100%" alignContent="Center" alignItems="Center">
-            <VBox width="50%" alignItems="Center" alignContent="Center" class="responsiveBox sapUiNoMarginEnd" fitContainer="true" height="100%">
+            <VBox width="55%" alignItems="Center" alignContent="Center" class="responsiveBox sapUiNoMarginEnd" fitContainer="true" height="100%">
                 <VBox id="vbList" width="100%" height="100%" alignItems="Center" alignContent="Center" justifyContent="Center" class="">
                     <ScrollContainer width="100%" height="100%" vertical="true" horizontal="false">
                         <List items="{path: '/value'}" id="palletsLst" mode="SingleSelectMaster" visible="{path: 'Status_ID', formatter: '.formatter.hideLoaded'}" sticky="HeaderToolbar">
@@ -35,7 +35,7 @@
                                                     <Text text="{i18n>palletid}" class="whiteText "/>
                                                     <Text text="{PALLETID}" class="whiteText "/>
                                                 </VBox>-->
-                                                <VBox alignContent="Start" alignItems="Start" justifyContent="Center" class="roundBoxBlue">
+                                                <VBox alignContent="Start" alignItems="Start" justifyContent="Center" class="roundBoxBlue" fitContainer="true" width="170px">
                                                     <HBox alignContent="Center" alignItems="Center">
                                                         <Text text="{i18n>palletid}" class="whiteText "/>
                                                         <Text text="{PALLETID}" class="whiteText "/>
@@ -56,7 +56,7 @@
                 </VBox>
             </VBox>
             <VBox width="60%" alignItems="Center" alignContent="Center" justifyContent="Center" class="responsiveBox sapUiTinyMargin sapUiNoMarginBegin" fitContainer="true" height="100%">
-                <Title class="loadVehicleFilters loadVehicleSelected sapUiTinyMarginTop" text="{i18n>scanText}"/>
+                <Title class="loadVehicleFilters loadVehicleSelected sapUiTinyMarginTop" text="{i18n>scanText}" wrapping="true"/>
                 <Input id="inPalletID" width="12rem" value="" class="largeWidthPallet" placeholder="{i18n>enterPalletID}" change="onScanPallet"/>
 
                 <Button id="confirmLoad" class="largeWidthPallet blackButton sapUiTinyMarginTopBottom tallButton" text="{i18n>confirmLoad}" press="onConfirmLoaded"/>
