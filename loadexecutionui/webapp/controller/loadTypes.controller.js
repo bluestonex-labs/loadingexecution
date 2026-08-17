@@ -65,13 +65,14 @@ sap.ui.define([
             BusyIndicator.show(500);
             var routeField = "All";
             var plant = this.getOwnerComponent().getModel("configModel").getData().Plant;
-            var delDate = this.getOwnerComponent().getModel("configModel").getData().DeliveryDate;
+            var startDate = this.getOwnerComponent().getModel("configModel").getData().startDate;
+            var endDate = this.getOwnerComponent().getModel("configModel").getData().endDate;
             var oLocale = sap.ui.getCore().getConfiguration().getLocale();
             var lang = oLocale.language;
 
             var that = this;
             $.ajax({
-                url: this.appModulePath + "/cloudWMService/Loading/getConsolidatedRoutes(checkRouteField='" + routeField + "',startDate='" + delDate + "',endDate='" + delDate + "',Plant='" + plant + "')",
+                url: this.appModulePath + "/cloudWMService/Loading/getConsolidatedRoutes(checkRouteField='" + routeField + "',startDate='" + startDate + "',endDate='" + endDate + "',Plant='" + plant + "')",
                 beforeSend: function (xhr) { xhr.setRequestHeader('Accept-Language', lang); },
                 type: "GET",
                 contentType: "application/json",
@@ -105,13 +106,14 @@ sap.ui.define([
             BusyIndicator.show(500);
             var routeField = "Shuttle";
             var plant = this.getOwnerComponent().getModel("configModel").getData().Plant;
-            var delDate = this.getOwnerComponent().getModel("configModel").getData().DeliveryDate;
+            var startDate = this.getOwnerComponent().getModel("configModel").getData().startDate;
+            var endDate = this.getOwnerComponent().getModel("configModel").getData().endDate;
             var oLocale = sap.ui.getCore().getConfiguration().getLocale();
             var lang = oLocale.language;
 
             var that = this;
             $.ajax({
-                url: this.appModulePath + "/cloudWMService/Loading/getConsolidatedRoutes(checkRouteField='" + routeField + "',startDate='" + delDate + "',endDate='" + delDate + "',Plant='" + plant + "')",
+                url: this.appModulePath + "/cloudWMService/Loading/getConsolidatedRoutes(checkRouteField='" + routeField + "',startDate='" + startDate + "',endDate='" + endDate + "',Plant='" + plant + "')",
                 beforeSend: function (xhr) { xhr.setRequestHeader('Accept-Language', lang); },
                 type: "GET",
                 contentType: "application/json",
@@ -147,13 +149,14 @@ sap.ui.define([
             BusyIndicator.show(500);
             var routeField = "Radial";
             var plant = this.getOwnerComponent().getModel("configModel").getData().Plant;
-            var delDate = this.getOwnerComponent().getModel("configModel").getData().DeliveryDate;
+            var startDate = this.getOwnerComponent().getModel("configModel").getData().startDate;
+            var endDate = this.getOwnerComponent().getModel("configModel").getData().endDate;
             var oLocale = sap.ui.getCore().getConfiguration().getLocale();
             var lang = oLocale.language;
 
             var that = this;
             $.ajax({
-                url: this.appModulePath + "/cloudWMService/Loading/getConsolidatedRoutes(checkRouteField='" + routeField + "',startDate='" + delDate + "',endDate='" + delDate + "',Plant='" + plant + "')",
+                url: this.appModulePath + "/cloudWMService/Loading/getConsolidatedRoutes(checkRouteField='" + routeField + "',startDate='" + startDate + "',endDate='" + endDate + "',Plant='" + plant + "')",
                 beforeSend: function (xhr) { xhr.setRequestHeader('Accept-Language', lang); },
                 type: "GET",
                 contentType: "application/json",
@@ -190,7 +193,7 @@ sap.ui.define([
             var oSelectedItem = oEvent.getParameter("listItem");
             var oContext = oSelectedItem.getBindingContext();
             var oData = oContext.getObject();
-            if (oData.newStatus.toUpperCase() === "OPEN" || oData.newStatus.toUpperCase() === "OUVERT") {
+            if (oData.newStatus.toUpperCase() === "OPEN" || oData.newStatus.toUpperCase() === "OUVERTE" || oData.newStatus.toUpperCase() === "IN PROGRESS" || oData.newStatus.toUpperCase() === "EN COURS") {
                 var selectedrouteID = oData.Route
                 var loadType = "";
                 if (oData.Shuttle === 1) {
@@ -209,6 +212,8 @@ sap.ui.define([
                     "Value": oData.Route
                 }
                 this.reportingService(payload);
+
+                this.getOwnerComponent().getModel("configModel").getData().deliveryDate = oData.DeliveryDate;
 
                 oRouter.navTo("shuttle", {
                     routeID: selectedrouteID,

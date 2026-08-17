@@ -91,7 +91,7 @@ sap.ui.define([
         },
 
         onVehicleConfirm: function () {
-            var sVehicleId = this.getView().byId("productInput").getValue();
+            var sVehicleId = this.getView().byId("productInput").getSelectedKey();
             var plant = this.getOwnerComponent().getModel("configModel").getData().Plant;
             var routeID = this.routeID;
             //MessageBox.show("Please Implement Vehicle update againt RouteID");
