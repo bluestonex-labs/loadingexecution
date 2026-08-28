@@ -71,7 +71,7 @@ sap.ui.define([
                     // Sort the data array in-place
                     oData.value.sort((a, b) => collator.compare(a.actualRoute, b.actualRoute));
                     var openPallet = {};
-                    openPallet.value = oData.value.filter(function (item) { return item.Status_ID !== 'LOADED'; });
+                    openPallet.value = oData.value.filter(function (item) { return item.Status_ID === 'READYFORLOADING'; });
                     var loadedPallets = {};
                     loadedPallets.value = oData.value.filter(function (item) { return item.Status_ID === 'LOADED'; });
                     var confirmedModel = new JSONModel(loadedPallets);
@@ -84,7 +84,7 @@ sap.ui.define([
                     if (openPallet.value.length > 0) {
                         that.getView().byId("inPalletID").setEnabled(true);
                         for (var i = 0; i < openPallet.value.length; i++) {
-                            if (openPallet.value[i].Status_ID !== 'LOADED') {
+                            if (openPallet.value[i].Status_ID === 'READYFORLOADING') {
                                 if (openPallet.value[i].Temperature === "Frozen") {
                                     frozenCount = frozenCount + 1;
                                     openPallet.value[i].FrozenIcon = "sap-icon://heating-cooling";
