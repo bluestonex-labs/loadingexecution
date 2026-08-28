@@ -19,6 +19,14 @@ sap.ui.define([
             this.getOwnerComponent().setModel(configModel, "configModel");
         },
 
+        onAfterRendering: function () {
+            if (window.matchMedia("(orientation: portrait)").matches) {
+                this.getView().byId("hbHome").setDirection("Column");
+            } else {
+                this.getView().byId("hbHome").setDirection("Row");
+            }
+        },
+
         onLoadVehicle: function () {
             var selectedDate = this.getView().byId("picker0").getDateValue();
             var secondDate = this.getView().byId("picker0").getSecondDateValue();
