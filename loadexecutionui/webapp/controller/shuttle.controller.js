@@ -48,11 +48,14 @@ sap.ui.define([
             BusyIndicator.show(500);
             var routeID = this.routeID;
             var plant = this.getOwnerComponent().getModel("configModel").getData().Plant;
+            var startDate = this.getOwnerComponent().getModel("configModel").getData().startDate;
+            var endDate = this.getOwnerComponent().getModel("configModel").getData().endDate;
             var oLocale = sap.ui.getCore().getConfiguration().getLocale();
             var lang = oLocale.language;
             var that = this;
             $.ajax({
-                url: this.appModulePath + "/cloudWMService/Loading/getVehiclesForRoute(ConsolidatedRoute='" + routeID + "',Plant='" + plant + "')",
+                url: this.appModulePath + "/cloudWMService/Loading/getVehiclesForRoute(ConsolidatedRoute='" + routeID + "',Plant='" + plant + "',startDate='" + startDate + "',endDate='" + endDate + "')",
+                //getVehiclesForRoute(ConsolidatedRoute='" + routeID + "',Plant='" + plant + "')",
                 beforeSend: function (xhr) { xhr.setRequestHeader('Accept-Language', lang); },
                 type: "GET",
                 contentType: "application/json",
@@ -100,6 +103,7 @@ sap.ui.define([
             var sVehicleId = this.getView().byId("productInput").getSelectedKey();
             var plant = this.getOwnerComponent().getModel("configModel").getData().Plant;
             var routeID = this.routeID;
+            
             //MessageBox.show("Please Implement Vehicle update againt RouteID");
             var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
             var payload = {
