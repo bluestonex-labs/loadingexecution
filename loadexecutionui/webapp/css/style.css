@@ -59,8 +59,8 @@
     border: none;
     border-radius: 2rem;
     align-items: center;
-    height: 2.5rem;
-    min-width: 12rem;
+    height: 3.5rem;
+    min-width: 8rem;
 }
 
 .roundBoxGreen {
@@ -180,4 +180,12 @@
 
 .largeWidth {
     width: 200px !important;
+}
+
+.largeWidthPallet {
+    width: 150px !important;
+}
+
+.largeWidthLoadTypeScreenButton {
+    width: 120px !important;
 }

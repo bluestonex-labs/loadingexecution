@@ -51,13 +51,14 @@ sap.ui.define([
             var loadType = this.LoadType;
             var routeID = this.routeID;
             var plant = this.Plant;
-            var deldate = this.getOwnerComponent().getModel("configModel").getData().DeliveryDate;
+            var startDate = this.getOwnerComponent().getModel("configModel").getData().startDate;
+            var endDate = this.getOwnerComponent().getModel("configModel").getData().endDate;
             var oLocale = sap.ui.getCore().getConfiguration().getLocale();
             var lang = oLocale.language;
             var that = this;
 
             $.ajax({
-                url: this.appModulePath + "/cloudWMService/Loading/getPalletsOfRoute(checkRouteField='" + loadType + "',DeliveryDate='" + deldate + "',Plant='" + plant + "',Route='" + routeID + "',Execution=true)",
+                url: this.appModulePath + "/cloudWMService/Loading/getPalletsOfRoute(checkRouteField='" + loadType + "',startDate='" + startDate + "',endDate='" + endDate + "',Plant='" + plant + "',Route='" + routeID + "',Execution=true)",
                 beforeSend: function (xhr) { xhr.setRequestHeader('Accept-Language', lang); },
                 type: "GET",
                 contentType: "application/json",
@@ -65,35 +66,47 @@ sap.ui.define([
                 async: true,
                 success: function (oData, response) {
                     BusyIndicator.hide();
+                    const collator = new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' });
+
+                    // Sort the data array in-place
+                    oData.value.sort((a, b) => collator.compare(a.actualRoute, b.actualRoute));
+                    var openPallet = {};
+                    openPallet.value = oData.value.filter(function (item) { return item.Status_ID !== 'LOADED'; });
+                    var loadedPallets = {};
+                    loadedPallets.value = oData.value.filter(function (item) { return item.Status_ID === 'LOADED'; });
+                    var confirmedModel = new JSONModel(loadedPallets);
+                    that.getView().setModel(confirmedModel, "confirmedModel");
                     var getPallets = that.getView().byId("palletsLst");
                     var frozenCount = 0;
                     var freshCount = 0;
-                    if (oData.value.length > 0) {
+                    var allPalletsMod = new JSONModel();
+                    getPallets.setModel(allPalletsMod);
+                    if (openPallet.value.length > 0) {
                         that.getView().byId("inPalletID").setEnabled(true);
-                        //that.getView().byId("vbList").setVisible(true);
-                        for (var i = 0; i < oData.value.length; i++) {
-                            if (oData.value[i].Temperature === "Frozen") {
-                                frozenCount = frozenCount + 1;
-                                oData.value[i].FrozenIcon = "sap-icon://heating-cooling";
-                                oData.value[i].FrozenState = "Information";
-                                oData.value[i].Visible = true;
-                                oData.value[i].State = "None";
-                            } else if (oData.value[i].Temperature === "Fresh") {
-                                freshCount = freshCount + 1;
-                                oData.value[i].FrozenIcon = "sap-icon://e-care";
-                                oData.value[i].FrozenState = "Success";
-                                oData.value[i].Visible = true;
-                                oData.value[i].State = "None";
+                        for (var i = 0; i < openPallet.value.length; i++) {
+                            if (openPallet.value[i].Status_ID !== 'LOADED') {
+                                if (openPallet.value[i].Temperature === "Frozen") {
+                                    frozenCount = frozenCount + 1;
+                                    openPallet.value[i].FrozenIcon = "sap-icon://heating-cooling";
+                                    openPallet.value[i].FrozenState = "Information";
+                                    openPallet.value[i].Visible = true;
+                                    openPallet.value[i].State = "None";
+                                } else if (openPallet.value[i].Temperature === "Fresh") {
+                                    freshCount = freshCount + 1;
+                                    openPallet.value[i].FrozenIcon = "sap-icon://e-care";
+                                    openPallet.value[i].FrozenState = "Success";
+                                    openPallet.value[i].Visible = true;
+                                    openPallet.value[i].State = "None";
+                                }
                             }
                         }
-                        var allPalletsDumData = oData;
-                        var allPalletsMod = new JSONModel(allPalletsDumData);
+                        var allPalletsDumData = openPallet;
+                        allPalletsMod.setData(allPalletsDumData);
                         getPallets.setModel(allPalletsMod);
                     } else {
                         that.getView().byId("inPalletID").setEnabled(false);
-                        //that.getView().byId("vbList").setVisible(false);
                     }
-                    that.getView().byId("total").setText(oData.value.length);
+                    that.getView().byId("total").setText(openPallet.value.length);
                     that.getView().byId("frozen").setText(frozenCount);
                     that.getView().byId("fresh").setText(freshCount);
                 },
@@ -127,6 +140,56 @@ sap.ui.define([
         },
 
         onClose: function () {
+            BusyIndicator.show(500);
+            var items = this.getView().byId("palletsLst").getModel("confirmedModel").getData().value;
+            var idList = [];
+            for (var i = 0; i < items.length; i++) {
+                if (items[i].Status_ID === "LOADED") {
+                    idList.push(items[i].ID);
+                }
+            }
+            var payload = {
+                "Items": {
+                    "ID": idList
+                }
+            };
+            var that = this;
+            var reportingPayload;
+
+            $.ajax({
+                url: this.appModulePath + "/cloudWMService/Loading/confirmLoadClosed",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(payload),
+                dataType: "json",
+                async: true,
+                success: function (oData, response) {
+                    BusyIndicator.hide();
+                    MessageToast.show(idList.length + " " + that.getView().getModel("i18n").getResourceBundle().getText("palletClosed"));
+                    for (var i = 0; i < items.length; i++) {
+                        if (items[i].State === "Success") {
+                            reportingPayload = {
+                                "Event_Timestamp": null,
+                                "Event_Type": "VEHICLE_CLOSED",
+                                "ID": "",
+                                "Level": "I",
+                                "PickTask_ID": items[i].TASK_ID,
+                                "User_ID": null,
+                                "Value": that.vehicleId
+                            };
+                            that.reportingService(reportingPayload);
+                        }
+                    } 
+                    that.getOwnerComponent().getRouter().navTo("loadTypes");
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    BusyIndicator.hide();
+                    MessageBox.error(that.getView().getModel("i18n").getResourceBundle().getText("serviceCallErrorMessage"));
+                }
+            }, this);
+        },
+
+        onClose1: function () {
             var payload = {
                 "Event_Timestamp": null,
                 "Event_Type": "VEHICLE_CLOSED",
@@ -210,17 +273,9 @@ sap.ui.define([
             var items = this.getView().byId("palletsLst").getModel().getData().value;
             var idList = [];
             for (var i = 0; i < items.length; i++) {
-                /*if (i > 1) {
-                    break;
-                } else {
-                    if (items[i].State === "Success") {
-                        
-                    }
-                }*/
                 if (items[i].State === "Success") {
                     idList.push(items[i].ID);
                 }
-
             }
             var payload = {
                 "Items": {

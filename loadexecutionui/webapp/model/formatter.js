@@ -23,6 +23,14 @@ sap.ui.define([], function () {
                 default:
                     return "None";
             }
+        },
+
+        hideLoaded: function (Status_ID) {
+            if (Status_ID === "LOADED") {
+                return false;
+            } else {
+                return true;
+            }
         }
 
     };
