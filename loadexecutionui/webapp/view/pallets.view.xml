@@ -24,6 +24,7 @@
                                             <FlexItemData growFactor="1"/>
                                         </core:layoutData>
                                     </core:Icon>
+                                    <Button icon="sap-icon://refresh" class="sapUiTinyMargin" press="getPalletsList"/>
                                 </HBox>
                                 </OverflowToolbar>
                             </headerToolbar>
