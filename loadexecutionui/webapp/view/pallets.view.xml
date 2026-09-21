@@ -3,7 +3,7 @@
         <HBox width="100%" height="100%" alignContent="Center" alignItems="Center">
             <VBox width="100%" alignItems="Center" alignContent="Center" class="responsiveBox sapUiNoMarginEnd" fitContainer="true" height="100%">
                 <VBox id="vbList" width="100%" height="100%" alignItems="Center" alignContent="Center" justifyContent="Center" class="">
-                    <ScrollContainer width="100%" height="100%" vertical="true" horizontal="false">
+                    <ScrollContainer width="100%" height="300px" vertical="true" horizontal="false">
                         <List items="{path: '/value'}" id="palletsLst" mode="SingleSelectMaster" visible="{path: 'Status_ID', formatter: '.formatter.hideLoaded'}" sticky="HeaderToolbar">
                             <headerToolbar>
                             <OverflowToolbar design="Transparent" style="Clear">
@@ -55,11 +55,11 @@
                         </List>
                     </ScrollContainer>
                 </VBox>
-                <VBox width="60%" alignItems="Center" alignContent="Center" justifyContent="Center" class="responsiveBox sapUiTinyMargin sapUiNoMarginBegin" fitContainer="true" height="100%">
-                <Title class="loadVehicleFilters loadVehicleSelected sapUiTinyMarginTop" text="{i18n>scanText}" wrapping="true"/>
+                <VBox width="100%" alignItems="Center" alignContent="Center" justifyContent="Center" class="responsiveBox sapUiTinyMargin sapUiNoMarginBegin" fitContainer="true" height="100%">
+                <Title class="loadVehicleFilters loadVehicleSelected sapUiTinyMarginTop" text="{i18n>scanText}" wrapping="false"/>
                 <Input id="inPalletID" width="12rem" value="" class="largeWidthPallet" placeholder="{i18n>enterPalletID}" change="onScanPallet"/>
 
-                <HBox class="sapUiSmallMarginTop">
+                <HBox class="sapUiTinyMarginTop">
                 <Button id="close" class="largeWidthPallet blackButton tallButton sapUiSmallMarginEnd" text="{i18n>close}" press="onRouteClose"/>
                 <Button id="confirmLoad" class="largeWidthPallet blackButton tallButton" text="{i18n>confirmLoad}" press="onConfirmLoaded"/>
                 </HBox>
