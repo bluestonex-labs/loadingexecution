@@ -11,7 +11,7 @@
                     <VBox width="100%" height="100%" alignContent="Center" alignItems="Center" fitContainer="true" justifyContent="Center">
                         <List items="{path: '/value'}" id="allLoadLst" class="transparentList loadList sapUiSizeCozy" mode="SingleSelectMaster" itemPress="onListItemPress" growing="true" growingThreshold="5" backgroundDesign="Transparent">
                             <CustomListItem id="clTemplate" type="Active" class="sapUiSmallMarginBottom ListButtons">
-                                <VBox class="boxItem sapUiTinyMarginBottom" width="100%" alignContent="Center" alignItems="Center" fitContainer="true" justifyContent="Center">
+                                <VBox class="boxItem sapUiTinyMarginBottom" width="120px" alignContent="Center" alignItems="Center" fitContainer="true" justifyContent="Center">
                                     <HBox justifyContent="Inherit" class="boxItem sapUiTinyMargin" width="100%" fitContainer="true" alignContent="Center" alignItems="Center" height="100%">
                                         <Text text="{i18n>route} {Route}" class="sapUiTinyMarginBegin"/>
                                         <ToolbarSpacer/>

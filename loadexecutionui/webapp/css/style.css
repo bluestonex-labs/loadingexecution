@@ -79,7 +79,7 @@
 
 .responsiveBox {
     width: 50%;
-    padding: 0 1rem;
+    padding: 0 1.5rem;
     box-sizing: border-box;
 }
 
@@ -119,7 +119,7 @@
 }
 
 .customMarginPalletList {
-    margin: .2rem !important;
+    margin: .3rem !important;
 }
 
 .loadList .sapMLIB {
@@ -175,6 +175,15 @@
     background-color: black !important;
     background: black !important;
     border-color: black !important; 
+    word-wrap: break-word !important
+    
+    
+}
+
+.blackButton .sapMBtnContent {
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    word-break: normal !important; /* Adjust to break-all if dealing with very long unbroken strings */
     
 }
 
@@ -183,7 +192,7 @@
 }
 
 .largeWidthPallet {
-    width: 150px !important;
+    width: 95px !important;
 }
 
 .largeWidthLoadTypeScreenButton {

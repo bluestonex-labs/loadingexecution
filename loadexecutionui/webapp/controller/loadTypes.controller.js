@@ -35,7 +35,7 @@ sap.ui.define([
             var lang = oLocale.language;
             var that = this;
             $.ajax({
-                url: this.appModulePath + "/cloudWMService/CloudWM/getPlantListForUser()",
+                url: this.appModulePath + "/cloudWMService/CloudWM/getUserContext()",//"/cloudWMService/CloudWM/getPlantListForUser()",
                 beforeSend: function (xhr) { xhr.setRequestHeader('Accept-Language', lang); },
                 type: "GET",
                 contentType: "application/json",
@@ -43,11 +43,7 @@ sap.ui.define([
                 async: true,
                 success: function (oData, response) {
                     BusyIndicator.hide();
-                    const assignedPlants = oData.value;
-                    assignedPlants.forEach(function (assignedPlant, index) {
-                        if (assignedPlant.DefaultPlant)
-                            that.plant = assignedPlant.Plant;
-                    });
+                    that.plant = oData.value.split(",")[0].replaceAll('"', "").split(":")[1];
 
                     that.getOwnerComponent().getModel("configModel").getData().Plant = that.plant;
                     that.onAllLoads();
