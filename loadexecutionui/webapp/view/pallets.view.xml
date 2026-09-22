@@ -3,7 +3,7 @@
         <HBox width="100%" height="100%" alignContent="Center" alignItems="Center">
             <VBox width="100%" alignItems="Center" alignContent="Center" class="responsiveBox sapUiNoMarginEnd" fitContainer="true" height="100%">
                 <VBox id="vbList" width="100%" height="100%" alignItems="Center" alignContent="Center" justifyContent="Center" class="">
-                    <ScrollContainer width="100%" height="300px" vertical="true" horizontal="false">
+                    <ScrollContainer width="100%" height="210px" vertical="true" horizontal="false">
                         <List items="{path: '/value'}" id="palletsLst" mode="SingleSelectMaster" visible="{path: 'Status_ID', formatter: '.formatter.hideLoaded'}" sticky="HeaderToolbar">
                             <headerToolbar>
                             <OverflowToolbar design="Transparent" style="Clear">
